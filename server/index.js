@@ -9,10 +9,15 @@ const bodyParser = require('body-parser');
 const CorsOptions = require('./config/CorsConfig');
 
 const RouteUser = require('./controller/User.js');
+const RouteKeyHandler = require('./controller/Key.js');
 
 const app = express();
+
+require('dotenv').config();
+// TODO ENV FILE AND SET IN EVERY FILE THE PORT WITH THE PORT IN THE FILÖE
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 9000;
+console.log(process.env.HOST);
 
 app.set('port', port);
 
@@ -33,6 +38,7 @@ app.use(bodyParser.json());
 app.listen(port, host);
 
 app.use('/users', cors(CorsOptions), RouteUser);
+app.use('/keys', cors(CorsOptions), RouteKeyHandler);
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js');

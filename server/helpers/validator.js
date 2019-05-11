@@ -28,7 +28,16 @@ function validateUsername (username) {
   return false;
 }
 
+/**
+ * validate if the given is valid
+ * @param {String} key
+ */
+function validateKey (key) {
+  const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n'];
+  return possibleKeys.includes(key);
+}
 module.exports = {
   validatePassword,
   validateUsername,
+  validateKey,
 };

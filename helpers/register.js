@@ -5,7 +5,7 @@ import Validator from './validator';
 
 class UserRegistration {
   constructor () {
-    this.url = 'http://localhost:9000';
+    this.url = `http://${process.env.HOST}:${process.env.PORT}`;
   }
 
   /**

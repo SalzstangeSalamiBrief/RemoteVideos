@@ -28,6 +28,15 @@ class Validator {
     }
     return true;
   }
+
+  /**
+   * validate if the given is valid
+   * @param {String} key
+   */
+  validateKey (key) {
+    const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n'];
+    return possibleKeys.includes(key);
+  }
 }
 
 export default new Validator();

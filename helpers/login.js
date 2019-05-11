@@ -2,16 +2,27 @@
  * Class for the login and logout feature
  */
 import Validator from './validator';
+import Cookie from './cookie';
 
 class Login {
   constructor () {
-    this.loginURL = 'http://localhost:9000';
+    this.loginURL = `http://${process.env.HOST}:${process.env.PORT}/users`;
   }
 
-  checkKey () {
+  async checkKey (username) {
+    const authCookie = Cookie.getAuthToken();
+    if (authCookie) {
+      const response = await fetch(`${this.loginURL}/`);
+      console.log(username, response);
+    }
     return this.loginURL;
   }
 
+  /**
+   * Return a jwt-token, if the given credetials are correct.
+   * @param {String} username
+   * @param {String} password
+   */
   async login (username = '', password = '') {
     if (!Validator.validateUsername(username)) {
       // todo err
@@ -21,7 +32,7 @@ class Login {
       // todo err
       return false;
     }
-    const response = await fetch(`${this.loginURL}/users/login`, {
+    const response = await fetch(`${this.loginURL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

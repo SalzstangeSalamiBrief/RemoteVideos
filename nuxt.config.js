@@ -34,7 +34,21 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: [],
+  modules: [
+    [
+      'nuxt-fontawesome',
+      {
+        component: 'fa',
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['faVolumeUp', 'faVolumeDown', 'faPause', 'faPlay'],
+          },
+        ],
+      },
+    ],
+    'nuxt-svg-loader',
+  ],
   // register express middleware to run before each route
   serverMiddleware: [],
 
@@ -56,5 +70,9 @@ module.exports = {
         });
       }
     },
+  },
+  env: {
+    HOST: process.env.HOST || 'http://127.0.0.1:9000',
+    PORT: process.env.PORT || '9000',
   },
 };

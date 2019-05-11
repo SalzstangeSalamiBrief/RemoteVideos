@@ -68,6 +68,7 @@ export default {
       }
       Cookie.setAuthToken(resp.token);
       this.$store.commit('userProfile/login');
+      this.$store.commit('userProfile/setUsername', this.username);
       this.$router.push('/');
     },
   },

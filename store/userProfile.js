@@ -1,5 +1,6 @@
 export const state = () => ({
   isLoggedIn: false,
+  username: '',
 });
 export const getters = {};
 export const mutations = {
@@ -12,6 +13,9 @@ export const mutations = {
     if (state.isLoggedIn) {
       state.isLoggedIn = false;
     }
+  },
+  setUsername (state, payload) {
+    state.username = payload;
   },
 };
 export const actions = {};
