@@ -1,4 +1,5 @@
 const pkg = require('./package');
+const { createOptions } = require('./server/config/SSL');
 
 module.exports = {
   mode: 'universal',

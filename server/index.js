@@ -1,17 +1,16 @@
 const express = require('express');
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
+// import middleware
 const logger = require('morgan');
 const cors = require('cors');
-
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CorsOptions = require('./config/CorsConfig');
-
+const { auth } = require('./middleware/auth');
+// import routes
 const RouteUser = require('./controller/User.js');
 const RouteKeyHandler = require('./controller/Key.js');
-
-const { auth } = require('./middleware/auth');
 
 const app = express();
 
