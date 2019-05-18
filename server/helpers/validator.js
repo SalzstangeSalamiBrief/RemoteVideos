@@ -8,9 +8,11 @@
  */
 function validatePassword (password) {
   // password does not have a length of 8 or more and does not match the pattern
-  const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
-  if (securityPWRegexp.test(password)) {
-    return true;
+  if (password) {
+    const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
+    if (securityPWRegexp.test(password)) {
+      return true;
+    }
   }
   return false;
 }
@@ -20,11 +22,14 @@ function validatePassword (password) {
  * @param {String} username
  */
 function validateUsername (username) {
-  const securityUsernameRegexp = /^[a-zA-Z0-9]{8,20}$/;
   // username does not have a length of 8 or more and does not match the pattern
-  if (securityUsernameRegexp.test(username)) {
-    return true;
+  if (username) {
+    const securityUsernameRegexp = /^[a-zA-Z0-9]{8,20}$/;
+    if (securityUsernameRegexp.test(username)) {
+      return true;
+    }
   }
+
   return false;
 }
 

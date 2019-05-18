@@ -20,6 +20,7 @@ html {
   width: 100vw;
   color: var(--white-color);
   background: var(--content--bg-color);
+  overflow: hidden;
 }
 
 *,

@@ -3,10 +3,10 @@
  */
 const bcrypt = require('bcryptjs');
 // import user-query
-const {createNewUser, findUserByName} = require('../db/queries/partial/user');
+const { createNewUser, findUserByName } = require('../db/queries/partial/user');
 
 // todo test
-function hashNewUser(username, password) {
+function hashNewUser (username, password) {
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {
       throw err;
@@ -17,7 +17,7 @@ function hashNewUser(username, password) {
       }
       createNewUser(username, hash)
         .then(() => console.log('succ'))
-        .catch(err => console.log(err));
+        .catch(error => console.log(error));
     });
   });
 }
@@ -27,10 +27,9 @@ function hashNewUser(username, password) {
  * @param {String} username
  * @param {String} password
  */
-async function checkPasswordHash(username, password) {
+async function checkPasswordHash (username, password) {
   const user = await findUserByName(username);
-  console.log(user);
-  if (user.length === 0) {
+  if (!user) {
     return false;
   }
   const hashedUserPassword = user.password;

@@ -3,7 +3,7 @@
  */
 const mongoose = require('mongoose');
 // register schemas
-require('../../models/user');
+require('../../models/User');
 
 const User = mongoose.model('users');
 
@@ -25,7 +25,7 @@ function createNewUser (username, password) {
  */
 function findUserByName (username) {
   return User.findOne({ username })
-    .select('-_v -__v')
+    .select('-_id -__v')
     .exec();
 }
 

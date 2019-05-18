@@ -11,6 +11,8 @@ const CorsOptions = require('./config/CorsConfig');
 const RouteUser = require('./controller/User.js');
 const RouteKeyHandler = require('./controller/Key.js');
 
+const { auth } = require('./middleware/auth');
+
 const app = express();
 
 require('dotenv').config();
@@ -38,7 +40,7 @@ app.use(bodyParser.json());
 app.listen(port, host);
 
 app.use('/users', cors(CorsOptions), RouteUser);
-app.use('/keys', cors(CorsOptions), RouteKeyHandler);
+app.use('/keys', cors(CorsOptions), auth, RouteKeyHandler);
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js');

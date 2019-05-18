@@ -10,12 +10,22 @@ class Login {
   }
 
   async checkKey (username) {
-    const authCookie = Cookie.getAuthToken();
-    if (authCookie) {
-      const response = await fetch(`${this.loginURL}/`);
-      console.log(username, response);
+    const token = Cookie.getAuthToken();
+    if (token) {
+      const response = await fetch(`${this.loginURL}/check-key`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ token, username }),
+      });
+      if (response.status !== 202) {
+        return false;
+      }
+      return true; // true;
     }
-    return this.loginURL;
+    return false;
   }
 
   /**

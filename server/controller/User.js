@@ -18,8 +18,6 @@ router.get('/', (req, res) => {
  */
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
-
-  console.log(username, password);
   // user does not exist
   const user = await findUserByName(username);
   if (!user) {
@@ -47,7 +45,6 @@ router.post('/register', async (req, res) => {
 router.post('/login', (req, res) => {
   const { username } = req.body;
   const { password } = req.body;
-  console.log(username, password);
   // invalid password
   if (!validatePassword(password)) {
     return res.status(406).send({ err: 'wrong credentials 1' });
@@ -61,21 +58,31 @@ router.post('/login', (req, res) => {
     return res.status(406).send({ err: 'wrong credentials 3' });
   }
   // the password in the db and request are the same
+  // todo check if key exists and is valid => if not generate a new one and send him
   const token = generateJWTToken(username);
-  res.status(202).send({ token });
+  return res.status(202).send({ token });
 });
-
 /**
  * Route for logging out
  * @param {String} req.body.username
  * @param {String} req.body.token
  */
-router.post('/logout', async (req, res) => {
-  // 1. first delete the token in the client
+router.post('/logout', async (req, res) => res.send('hello World'));
+// const data = await findUserByName(req.body.username);
+// return res.send(data);
+// 1. first delete the token in the client
+
+/**
+ * Route for checking, if the key of the user valid
+ * @param {String} req.body.username
+ * @param {String} req.body.token
+ */
+router.post('/check-key', async (req, res) => {
   const isVerified = await verifyJWTToken(req.body.username, req.body.token);
-  // res.send(verifyJWTToken(req.body.username, req.body.token));
-  // console.log(req.body);
-  res.send(isVerified);
+  if (isVerified) {
+    return res.status(202).send({ isVerified });
+  }
+  return res.status(401).send({ isVerified });
 });
 
 module.exports = router;
