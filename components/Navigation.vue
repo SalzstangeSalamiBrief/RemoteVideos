@@ -1,5 +1,7 @@
 <template>
-  <nav class="flex nav-bg center-item--horizontal main-nav">
+  <nav
+    :class="{'loggedin': isLoggedIn}"
+    class="flex nav-bg center-item--horizontal main-nav">
     <div class="nav__brand text-xl font-semibold tracking-tight">RemoteVideos</div>
     <div class="nav__space"/>
     <div class="nav__login-out center-item--vertical">
@@ -58,5 +60,12 @@ export default {
 }
 nav.main-nav{
   height: 70px;
+}
+@media(max-width: 765px){
+  nav.main-nav.loggedin{
+  height: 70px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
 }
 </style>
