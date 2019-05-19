@@ -15,7 +15,7 @@ module.exports = {
       { title: 'Remote Video' },
       { keywords: 'Remotecontrol, HTML5 Remote,' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/svg', href: '/favicon.svg' }],
   },
 
   /*
