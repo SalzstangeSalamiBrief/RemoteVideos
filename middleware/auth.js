@@ -2,8 +2,8 @@ import Login from '../helpers/login';
 
 export default function ({ store, redirect }) {
   return new Promise(async (resolve) => {
-    console.log(store.state.userProfile.isLoggedIn);
-    if (store.state.userProfile.isLoggedIn) {
+    if (store.state.userProfile.isLoggedIn === false) {
+      console.log('hi');
       const keyValidation = await Login.checkKey();
       if (keyValidation) {
         // set in STore
@@ -13,6 +13,5 @@ export default function ({ store, redirect }) {
     }
     // TODO ERR
     return resolve(redirect('/'));
-    // return resolve(false);
   });
 }

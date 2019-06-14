@@ -44,7 +44,13 @@ module.exports = {
         imports: [
           {
             set: '@fortawesome/free-solid-svg-icons',
-            icons: ['faVolumeUp', 'faVolumeDown', 'faPause', 'faPlay'],
+            icons: [
+              'faVolumeUp',
+              'faVolumeDown',
+              'faPause',
+              'faPlay',
+              'faForward',
+            ],
           },
         ],
       },

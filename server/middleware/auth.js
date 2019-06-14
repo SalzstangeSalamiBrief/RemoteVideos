@@ -6,8 +6,6 @@ const { verifyJWTToken } = require('../helpers/jwt');
  * If not, send an error, else return with next()
  */
 module.exports.auth = ({ body }, res, next) => {
-  console.log(body.usename);
-  console.log(validateUsername(body.username));
   if (validateKey(body.key)) {
     if (validateUsername(body.username)) {
       if (verifyJWTToken(body.username, body.token)) {

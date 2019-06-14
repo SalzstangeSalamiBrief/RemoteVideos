@@ -3,14 +3,19 @@
  */
 import Validator from './validator';
 import Cookie from './cookie';
-
+// TODO: Add
 class Login {
   constructor () {
     this.loginURL = `http://${process.env.HOST}:${process.env.PORT}/users`;
   }
 
+  /**
+   * check if the jwt is valid
+   * @param {String} username
+   */
   async checkKey (username) {
     const token = Cookie.getAuthToken();
+    console.log(token);
     if (token) {
       const response = await fetch(`${this.loginURL}/check-key`, {
         method: 'POST',
@@ -23,7 +28,7 @@ class Login {
       if (response.status !== 202) {
         return false;
       }
-      return true; // true;
+      return true;
     }
     return false;
   }

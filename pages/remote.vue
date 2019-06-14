@@ -49,8 +49,14 @@
         @click="sendKeyEvent('f')">
         <icon-fullscreen class="svg-white"/>
       </button>
+      <button
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        @click="sendKeyEvent('shift-n')">
+        <fa
+          icon="forward"
+          class="fa-1x"/>
+      </button>
     </div>
-
   </div>
 </template>
 <script>
@@ -62,7 +68,7 @@ import IconTab from '../static/iconTab.svg';
 import KeyHandler from '../helpers/key';
 
 export default {
-  middleware: 'auth',
+  // middleware: 'auth',
   components: {
     IconEnter,
     IconTab,
@@ -78,20 +84,9 @@ export default {
       if (key === 'space') {
         this.isPaused = !this.isPaused;
       }
-      KeyHandler.sendKey(key);
+      KeyHandler.sendKey(key, this.$store.state.userProfile.username);
     },
   },
-  // store is udnefined => import
-  // async beforeRouteEnter (to, from, next) {
-  //   const isValidKey = await Login.checkKey(this.$store.state.userProfile.username);
-  //   if (isValidKey) {
-  //     if (this.$store.state.userProfile.isLoggedIn) {
-  //       next();
-  //       return;
-  //     }
-  //   }
-  //   this.$router.push('/');
-  // },
 };
 </script>
 

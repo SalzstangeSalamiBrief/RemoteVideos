@@ -66,7 +66,7 @@ export default {
         // todo show err
         return;
       }
-      Cookie.setAuthToken(resp.token);
+      Cookie.setAuthToken(resp.token, this.username);
       this.$store.commit('userProfile/login');
       this.$store.commit('userProfile/setUsername', this.username);
       this.$router.push('/remote');

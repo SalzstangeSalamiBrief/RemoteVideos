@@ -6,8 +6,8 @@ class Cookie {
    * set a cookie with the token of the user
    * @param {String} token
    */
-  setAuthToken (token) {
-    document.cookie = `RemoteVideosCookie=${token};max-age=604800`;
+  setAuthToken (token, username) {
+    document.cookie = `RemoteVideosCookie=${token}-${username};max-age=604800`;
   }
 
   /**
@@ -24,6 +24,7 @@ class Cookie {
         .shift();
     }
     if (match) {
+      console.log(match);
       return match;
     }
     return undefined;

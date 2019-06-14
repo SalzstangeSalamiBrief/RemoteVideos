@@ -1,4 +1,5 @@
 import Validator from './validator';
+import CookieHandler from './cookie';
 
 class KeyHandler {
   constructor () {
@@ -6,14 +7,18 @@ class KeyHandler {
     this.url = `http://${process.env.HOST}:${process.env.PORT}/keys`;
   }
 
-  sendKey (key) {
-    console.log(Validator.validateKey(key));
-    console.log(this.url);
+  async sendKey (key, username) {
+    console.log(key);
     if (Validator.validateKey(key)) {
+      console.log(`${this.url}/sendKey`);
       fetch(`${this.url}/sendKey`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key }),
+        body: JSON.stringify({
+          key,
+          username,
+          token: CookieHandler.getAuthToken(),
+        }),
       });
     }
   }
