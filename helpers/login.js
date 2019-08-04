@@ -13,17 +13,35 @@ class Login {
    * check if the jwt is valid
    * @param {String} username
    */
-  async checkKey (username) {
-    const token = Cookie.getAuthToken();
-    console.log(token);
-    if (token) {
+  async checkKey (passedUsername, passedToken) {
+    // let token = '';
+    const credentials = { username: '', token: '' };
+    // console.log('_________________');
+    // console.log(username);
+    // console.log(passedToken);
+    if (passedUsername && passedToken) {
+      credentials.username = passedUsername;
+      credentials.token = passedToken;
+    } else {
+      const [tempUsername, tempToken] = Cookie.getAuthToken().split(
+        '-username-',
+      );
+      console.log(tempUsername);
+      console.log(tempToken);
+      credentials.username = tempUsername;
+      credentials.token = tempToken;
+    }
+    console.log(credentials);
+    // const credentials = passedToken || Cookie.getAuthToken();
+    // console.log(token);
+    if (credentials) {
       const response = await fetch(`${this.loginURL}/check-key`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({ token, username }),
+        body: JSON.stringify(credentials),
       });
       if (response.status !== 202) {
         return false;
@@ -39,6 +57,7 @@ class Login {
    * @param {String} password
    */
   async login (username = '', password = '') {
+    console.log(username);
     if (!Validator.validateUsername(username)) {
       // todo err
       return false;

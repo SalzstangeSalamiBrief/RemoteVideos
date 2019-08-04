@@ -7,7 +7,7 @@ class Cookie {
    * @param {String} token
    */
   setAuthToken (token, username) {
-    document.cookie = `RemoteVideosCookie=${token}-${username};max-age=604800`;
+    document.cookie = `RemoteVideosCookie=${token}-username-${username};max-age=604800`;
   }
 
   /**
@@ -18,6 +18,7 @@ class Cookie {
     const cookieToGet = `; ${document.cookie}`;
     const parts = cookieToGet.split('; RemoteVideosCookie=');
     if (parts.length === 2) {
+      console.log(parts);
       match = parts
         .pop()
         .split(';')

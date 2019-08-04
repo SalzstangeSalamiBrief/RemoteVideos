@@ -68,7 +68,7 @@ import IconTab from '../static/iconTab.svg';
 import KeyHandler from '../helpers/key';
 
 export default {
-  // middleware: 'auth',
+  middleware: 'auth',
   components: {
     IconEnter,
     IconTab,

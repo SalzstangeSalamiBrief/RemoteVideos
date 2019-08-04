@@ -78,7 +78,11 @@ router.post('/logout', async (req, res) => res.send('hello World'));
  * @param {String} req.body.token
  */
 router.post('/check-key', async (req, res) => {
+  console.log(req.body.username);
+  console.log(req.body.token);
+  // TODO: FIX VERIFICATION
   const isVerified = await verifyJWTToken(req.body.username, req.body.token);
+  console.log(isVerified);
   if (isVerified) {
     return res.status(202).send({ isVerified });
   }
