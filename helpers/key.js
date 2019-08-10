@@ -8,7 +8,6 @@ class KeyHandler {
   }
 
   async sendKey (key, username) {
-    console.log(key);
     if (Validator.validateKey(key)) {
       console.log(`${this.url}/sendKey`);
       fetch(`${this.url}/sendKey`, {

@@ -32,6 +32,7 @@ function verifyJWTToken (username, token) {
   return jwt.verify(token, publicKey, verifyOptions, (err, decoded) => {
     // username does not own the token
     if (err) {
+      console.log(err);
       return false;
     }
     // username does own the token

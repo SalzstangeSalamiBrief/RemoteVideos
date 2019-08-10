@@ -2,9 +2,20 @@
   <nav
     :class="{'loggedin': isLoggedIn}"
     class="flex nav-bg center-item--horizontal main-nav">
-    <div class="nav__brand text-xl font-semibold tracking-tight">RemoteVideos</div>
+    <nuxt-link
+      class="nav__brand text-xl font-semibold tracking-tight"
+      tag="div"
+      to="/">RemoteVideos</nuxt-link>
+    <!-- <div class="nav__brand text-xl font-semibold tracking-tight" @click="">RemoteVideos</div> -->
     <div class="nav__space"/>
-    <div class="nav__login-out center-item--vertical">
+    <div class="nav__login-out center-item--horizontal">
+      <nuxt-link
+        v-if="isLoggedIn"
+        class="inline-block text-sm px-4 py-2 mr-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
+        tag="a"
+        to="/remote">
+        Controlls
+      </nuxt-link>
       <nuxt-link
         v-if="!isLoggedIn"
         class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
@@ -14,7 +25,7 @@
       </nuxt-link>
       <a
         v-else
-        class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
+        class="inline-block text-sm px-4 py-2 mr-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
         @click="logOut">
         Logout
       </a>
@@ -53,13 +64,14 @@ export default {
   width: 200px
 }
 .nav__login-out{
-  width: 120px;
+  /* width: 120px; */
 }
  .nav__brand{
   padding-left: 1rem;
 }
 nav.main-nav{
   height: 70px;
+  width: 100vw;
 }
 @media(max-width: 765px){
   nav.main-nav.loggedin{

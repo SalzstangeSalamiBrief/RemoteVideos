@@ -23,15 +23,12 @@ class Login {
       credentials.username = passedUsername;
       credentials.token = passedToken;
     } else {
-      const [tempUsername, tempToken] = Cookie.getAuthToken().split(
-        '-username-',
-      );
-      console.log(tempUsername);
-      console.log(tempToken);
-      credentials.username = tempUsername;
-      credentials.token = tempToken;
+      const { token, username } = Cookie.getAuthToken();
+      console.log(token, username);
+      credentials.username = username;
+      credentials.token = token;
     }
-    console.log(credentials);
+    // console.log(credentials);
     // const credentials = passedToken || Cookie.getAuthToken();
     // console.log(token);
     if (credentials) {
