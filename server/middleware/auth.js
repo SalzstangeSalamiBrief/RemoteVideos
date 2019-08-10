@@ -6,12 +6,13 @@ const { verifyJWTToken } = require('../helpers/jwt');
  * If not, send an error, else return with next()
  */
 module.exports.auth = ({ body }, res, next) => {
-  if (validateKey(body.key)) {
-    if (validateUsername(body.username)) {
-      if (verifyJWTToken(body.username, body.token)) {
+  const { key, token: credentials } = body;
+  if (validateKey(key)) {
+    if (validateUsername(credentials.username)) {
+      if (verifyJWTToken(credentials.username, credentials.token)) {
         return next();
       }
     }
   }
-  return res.send({ err: 'invalid credentials' });
+  return res.status(401).send({ err: 'invalid credentials' });
 };

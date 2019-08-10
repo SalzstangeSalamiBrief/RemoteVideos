@@ -9,8 +9,8 @@ const router = express.Router();
  */
 router.post('/sendKey', (req, res) => {
   const { key } = req.body;
+  console.log(key);
   if (Validator.validateKey(key)) {
-    console.log(key);
     if (key === 'shift-n') {
       console.log('next');
       // next in playlist
