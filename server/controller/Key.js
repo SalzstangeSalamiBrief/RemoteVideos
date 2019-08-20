@@ -12,7 +12,6 @@ router.post('/sendKey', (req, res) => {
   console.log(key);
   if (Validator.validateKey(key)) {
     if (key === 'shift-n') {
-      console.log('next');
       // next in playlist
       robot.keyToggle('shift', 'down');
       robot.keyTap('n');

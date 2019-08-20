@@ -9,16 +9,20 @@ class KeyHandler {
 
   async sendKey (key, username) {
     if (Validator.validateKey(key)) {
-      console.log(`${this.url}/sendKey`);
-      fetch(`${this.url}/sendKey`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          key,
-          username,
-          token: CookieHandler.getAuthToken(),
-        }),
-      });
+      try {
+        fetch(`${this.url}/sendKey`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            key,
+            username,
+            token: CookieHandler.getAuthToken(),
+          }),
+        });
+      } catch (err) {
+        // console.log(err);
+        // todo err
+      }
     }
   }
 }

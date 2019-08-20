@@ -4,6 +4,12 @@
 
 ## Build Setup
 
+## TODOS
+
+Caching for username, password
+readme (docs, setup)
+CSS Header Burger for mobile
+
 ```bash
 # install dependencies
 $ npm install

@@ -24,18 +24,22 @@ class UserRegistration {
       // todo err
       return { err: 'Could not register this user' };
     }
-    const response = await fetch(`${this.url}/users/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
-    if (response.status !== 201) {
+    try {
+      const response = await fetch(`${this.url}/users/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      if (response.status !== 201) {
+        return { err: 'Could not register this user' };
+      }
+      return { succ: 'Register successfully' };
+    } catch (err) {
       return { err: 'Could not register this user' };
     }
-    return { succ: 'Register successfully' };
   }
 }
 

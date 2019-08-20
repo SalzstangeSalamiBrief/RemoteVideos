@@ -67,10 +67,6 @@ router.post('/login', (req, res) => {
  * @param {String} req.body.username
  * @param {String} req.body.token
  */
-router.post('/logout', async (req, res) => res.send('hello World'));
-// const data = await findUserByName(req.body.username);
-// return res.send(data);
-// 1. first delete the token in the client
 
 /**
  * Route for checking, if the key of the user valid
@@ -78,12 +74,16 @@ router.post('/logout', async (req, res) => res.send('hello World'));
  * @param {String} req.body.token
  */
 router.post('/check-key', async (req, res) => {
-  const isVerified = await verifyJWTToken(req.body.username, req.body.token);
-  console.log(isVerified);
-  if (isVerified) {
-    return res.status(202).send({ isVerified });
+  try {
+    const isVerified = await verifyJWTToken(req.body.username, req.body.token);
+    if (isVerified) {
+      return res.status(202).send({ isVerified });
+    }
+    return res.status(401).send({ isVerified });
+  } catch (err) {
+    console.log(err);
+    return res.status(401).send(false);
   }
-  return res.status(401).send({ isVerified });
 });
 
 module.exports = router;

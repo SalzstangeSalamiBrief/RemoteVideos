@@ -21,14 +21,12 @@ class Cookie {
     const cookieToGet = `; ${document.cookie}`;
     const parts = cookieToGet.split('; RemoteVideosCookie=');
     if (parts.length === 2) {
-      console.log(parts);
       match = parts
         .pop()
         .split(';')
         .shift();
     }
     if (match) {
-      console.log(match);
       return JSON.parse(match);
     }
     return undefined;

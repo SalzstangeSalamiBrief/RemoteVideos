@@ -60,7 +60,6 @@ export default {
      */
     async logUserIn () {
       const resp = await Login.login(this.username, this.password);
-      console.log(resp);
       if (resp.err) {
         Cookie.deleteCookie();
         // todo show err
