@@ -24,6 +24,7 @@ export default function ({ store, redirect, req }) {
       return resolve();
     }
     // default redirect to /
+    // store.dispatch('error/showError', 'Invalid User. Please log in!');
     return resolve(redirect('/'));
   });
 }

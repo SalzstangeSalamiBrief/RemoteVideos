@@ -59,16 +59,20 @@ export default {
      * if the response from the server does have an err-key then the login failed. Else the login was successfully and the authtoken and the store get configured
      */
     async logUserIn () {
-      const resp = await Login.login(this.username, this.password);
-      if (resp.err) {
+      try {
+        const resp = await Login.login(this.username, this.password);
+        if (!resp.err) {
+          Cookie.setAuthToken(resp.token, this.username);
+          this.$store.commit('userProfile/login');
+          this.$store.commit('userProfile/setUsername', this.username);
+          this.$router.push('/remote');
+          return;
+        }
+        this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
         Cookie.deleteCookie();
-        // todo show err
-        return;
+      } catch (err) {
+        this.$store.dispatch('error/showError', 'Something went wrong. Please try again.');
       }
-      Cookie.setAuthToken(resp.token, this.username);
-      this.$store.commit('userProfile/login');
-      this.$store.commit('userProfile/setUsername', this.username);
-      this.$router.push('/remote');
     },
   },
 };

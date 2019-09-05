@@ -17,17 +17,16 @@ class Cookie {
    * get the authtoken from the cookie of this app
    */
   getAuthToken () {
-    let match;
     const cookieToGet = `; ${document.cookie}`;
     const parts = cookieToGet.split('; RemoteVideosCookie=');
     if (parts.length === 2) {
-      match = parts
+      const match = parts
         .pop()
         .split(';')
         .shift();
-    }
-    if (match) {
-      return JSON.parse(match);
+      if (match) {
+        return JSON.parse(match);
+      }
     }
     return undefined;
   }
@@ -36,7 +35,7 @@ class Cookie {
    * delete the cookie
    */
   deleteCookie () {
-    document.cookie = 'RemoteVideosCookie=;max-age=0';
+    document.cookie = 'RemoteVideosCookie=;max-age=-1';
   }
 }
 

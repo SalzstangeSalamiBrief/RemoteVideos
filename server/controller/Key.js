@@ -18,7 +18,6 @@ router.post('/sendKey', (req, res) => {
       robot.keyToggle('shift', 'up');
       return;
     }
-    // todo shift n for next track
     robot.keyTap(key);
   }
   res.send({ succ: true });

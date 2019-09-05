@@ -21,7 +21,6 @@ class KeyHandler {
         });
       } catch (err) {
         // console.log(err);
-        // todo err
       }
     }
   }

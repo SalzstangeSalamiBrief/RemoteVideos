@@ -16,7 +16,7 @@ const { auth } = require('./middleware/auth');
 const app = express();
 
 require('dotenv').config();
-// TODO ENV FILE AND SET IN EVERY FILE THE PORT WITH THE PORT IN THE FILÖE
+
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 9000;
 console.log(process.env.HOST);

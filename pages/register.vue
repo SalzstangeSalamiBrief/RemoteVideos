@@ -1,7 +1,8 @@
 <template>
   <div class="w-full max-w-xs login-container">
     <form
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
       <h1 class="center-item--vertical text-grey-darker mb-5">Register</h1>
       <div class="mb-4">
         <label
@@ -25,16 +26,17 @@
         <input
           id="password"
           v-model="password"
-          class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           placeholder="******************">
-        <p class="text-red text-xs italic">Please choose a password.</p>
+          <!-- <p class="text-red text-xs italic">Please choose a password.</p> -->
       </div>
       <div class="flex items-center justify-between">
         <button
           class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
-          @click.prevent="registerUser">
+          @click.prevent="registerUser"
+        >
           Register
         </button>
       </div>
@@ -56,12 +58,17 @@ export default {
      * if the response from the server does have an err-key then the login failed. Else the login was successfully and the authtoken and the store get configured
      */
     async registerUser () {
-      const resp = await Register.registerUser(this.username, this.password);
-      if (resp.err) {
-        // todo show err
-        return;
+      console.log(')(');
+      try {
+        const resp = await Register.registerUser(this.username, this.password);
+        if (resp.status === 200) {
+          this.$router.push('/login');
+          return;
+        }
+        this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
+      } catch (error) {
+        this.$store.dispatch('error/showError', 'Somethign went wrong. Please try again.');
       }
-      this.$router.push('/login');
     },
   },
 };

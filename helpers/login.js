@@ -3,7 +3,7 @@
  */
 import Validator from './validator';
 import Cookie from './cookie';
-// TODO: Add
+
 class Login {
   constructor () {
     this.loginURL = `http://${process.env.HOST}:${process.env.PORT}/users`;
@@ -19,11 +19,15 @@ class Login {
       credentials.username = passedUsername;
       credentials.token = passedToken;
     } else {
-      const { token, username } = Cookie.getAuthToken();
-      credentials.username = username;
-      credentials.token = token;
+      try {
+        const { token, username } = Cookie.getAuthToken();
+        credentials.username = username;
+        credentials.token = token;
+      } catch (err) {
+        console.log(err);
+      }
     }
-    if (credentials) {
+    if (credentials.username !== '' && credentials.token !== '') {
       try {
         const response = await fetch(`${this.loginURL}/check-key`, {
           method: 'POST',
@@ -38,8 +42,6 @@ class Login {
         }
         return true;
       } catch (err) {
-        // todo err
-        // console.log(err);
         return false;
       }
     }
@@ -53,11 +55,9 @@ class Login {
    */
   async login (username = '', password = '') {
     if (!Validator.validateUsername(username)) {
-      // todo err
       return false;
     }
     if (!Validator.validatePassword(password)) {
-      // todo err
       return false;
     }
     try {
@@ -76,9 +76,7 @@ class Login {
       return content;
     } catch (err) {
       console.log(err);
-      // TODO: return err object
     }
-    // TODO: return err object
     return {};
   }
 

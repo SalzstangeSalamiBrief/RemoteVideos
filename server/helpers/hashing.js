@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 // import user-query
 const { createNewUser, findUserByName } = require('../db/queries/partial/user');
 
-// todo test
 function hashNewUser (username, password) {
   bcrypt.genSalt(10, (err, salt) => {
     if (err) {

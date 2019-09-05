@@ -7,14 +7,17 @@ export const mutations = {
   showError (state, message) {
     state.errorMsg = message;
     state.isActive = true;
-    setTimeout(() => {
-      state.isActive = false;
-      state.errorMsg = '';
-    }, 1000);
   },
   clearError (state) {
     state.isActive = false;
     state.errorMsg = '';
   },
 };
-export const actions = {};
+export const actions = {
+  showError ({ commit }, errorMsg) {
+    commit('showError', errorMsg);
+    setTimeout(() => {
+      commit('clearError');
+    }, 2000);
+  },
+};

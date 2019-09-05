@@ -48,7 +48,8 @@ export default {
     logOut () {
       Cookie.deleteCookie();
       this.$store.commit('userProfile/logout');
-      this.$router.push('/');
+      //  bugfix
+      window.location.href = `http://${process.env.HOST}:${process.env.PORT}/`;
     },
   },
 };
@@ -77,7 +78,7 @@ nav.main-nav{
   nav.main-nav.loggedin{
   height: 70px;
   padding: 1rem;
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
 }
 }
 </style>

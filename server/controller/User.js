@@ -42,23 +42,26 @@ router.post('/register', async (req, res) => {
  * @param {String} req.body.username
  * @param {String} req.body.password
  */
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { username } = req.body;
   const { password } = req.body;
   // invalid password
+  console.log(validatePassword(password));
   if (!validatePassword(password)) {
     return res.status(406).send({ err: 'wrong credentials 1' });
   }
+  console.log(validateUsername(username));
   if (!validateUsername(username)) {
     return res.status(406).send({ err: 'wrong credentials 2' });
   }
   // const isValidPassword = await checkPasswordHash(username, password);
   // entered password does not match with the password in the db
-  if (!checkPasswordHash(username, password)) {
+  const pwHashCheck = await checkPasswordHash(username, password);
+  if (!pwHashCheck) {
     return res.status(406).send({ err: 'wrong credentials 3' });
   }
   // the password in the db and request are the same
-  // todo check if key exists and is valid => if not generate a new one and send him
+
   const token = generateJWTToken(username);
   return res.status(202).send({ token });
 });

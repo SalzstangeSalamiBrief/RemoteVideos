@@ -17,11 +17,9 @@ class UserRegistration {
    */
   async registerUser (username = '', password = '') {
     if (!Validator.validateUsername(username)) {
-      // todo err
       return { err: 'Could not register this user' };
     }
     if (!Validator.validatePassword(password)) {
-      // todo err
       return { err: 'Could not register this user' };
     }
     try {
