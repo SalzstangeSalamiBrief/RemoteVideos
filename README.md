@@ -2,13 +2,20 @@
 
 > Remote App for Videoplayer
 
-## Build Setup
+This app is a remote control for HTML5 players. You can start/stop a video, enter/leave full screen and can skip to next video in a playlist.
 
-## TODOS
+## Usage
 
-Caching for username, password
+Let the server run in your WLAN on the same machine you want to watch Videos. Connect yourself with a mobile device like a smartphone to the server and use this device as remote control.
+
+## Requirements
+
+- Python 2.7
+- MongoDB
+
+## Setup
+
 readme (docs, setup)
-CSS Header Burger for mobile
 
 ```bash
 # install dependencies
