@@ -12,20 +12,29 @@ Let the server run in your WLAN on the same machine you want to watch Videos. Co
 
 - Python 2.7
 - MongoDB
+- NodeJS
 
 ## Setup
 
-readme (docs, setup)
+1. Create .env File (as reference take .example.env)
+2. RSA Key generation
+   ..1. generate one public and one private RSA key
+   ..2. Name your public Key 'public.key' and your private Key 'private.key'
+   ..3. Copy both keys into './server/private/rsa/jwt/
+3. Install NodeJS, MongoDB and Python
+4. Install dependencies
+
+## Command
 
 ```bash
 # install dependencies
-$ npm install
+$ npm i
 
-# serve with hot reload at localhost:3000
+# serve for development
 $ npm run dev
-
-# build for production and launch server
+# build the project for production
 $ npm run build
+# launch the server
 $ npm start
 
 # generate static project
