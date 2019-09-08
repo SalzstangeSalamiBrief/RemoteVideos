@@ -77,8 +77,16 @@ router.post('/login', async (req, res) => {
  * @param {String} req.body.token
  */
 router.post('/check-key', async (req, res) => {
+  const sendedToken = req.headers.authorization.split('Bearer ')[1];
+  if (!sendedToken || !req.body.username) {
+    return res.status(401).end({ isVerified: false });
+  }
+  const existingUser = await findUserByName(req.body.username);
+  if (existingUser.username !== req.body.username) {
+    return res.status(401).end({ isVerified: false });
+  }
   try {
-    const isVerified = await verifyJWTToken(req.body.username, req.body.token);
+    const isVerified = await verifyJWTToken(req.body.username, sendedToken);
     if (isVerified) {
       return res.status(202).send({ isVerified });
     }

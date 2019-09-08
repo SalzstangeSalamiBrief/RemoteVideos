@@ -34,8 +34,12 @@ class Login {
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
+            Authorization: `Bearer ${credentials.token}`,
           },
-          body: JSON.stringify(credentials),
+          body: JSON.stringify({
+            username: credentials.username,
+            password: credentials.password,
+          }),
         });
         if (response.status !== 202) {
           return false;
