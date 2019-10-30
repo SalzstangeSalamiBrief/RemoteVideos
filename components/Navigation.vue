@@ -1,31 +1,29 @@
 <template>
   <nav
     :class="{'loggedin': isLoggedIn}"
-    class="flex nav-bg center-item--horizontal main-nav">
+    class="nav-bg main-nav">
     <nuxt-link
       class="nav__brand text-xl font-semibold tracking-tight"
-      tag="div"
+      tag="a"
       to="/">RemoteVideos</nuxt-link>
-    <!-- <div class="nav__brand text-xl font-semibold tracking-tight" @click="">RemoteVideos</div> -->
-    <div class="nav__space"/>
     <div class="nav__login-out center-item--horizontal">
       <nuxt-link
         v-if="isLoggedIn"
-        class="inline-block text-sm px-4 py-2 mr-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
+        class="btn text-white py-2 px-4 border border-white rounded nav-btn"
         tag="a"
         to="/remote">
         Controlls
       </nuxt-link>
       <nuxt-link
         v-if="!isLoggedIn"
-        class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
+        class="btn text-white py-2 px-4 border border-white rounded nav-btn"
         tag="a"
         to="/login">
         Login
       </nuxt-link>
       <a
         v-else
-        class="inline-block text-sm px-4 py-2 mr-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white  lg:mt-0"
+        class="btn text-white py-2 px-4 border border-white rounded nav-btn"
         @click="logOut">
         Logout
       </a>
@@ -58,27 +56,34 @@ export default {
 .nav-bg{
   background: var(--nav--bg-color);
 }
-.nav__space{
-  width: calc(100vw - 320px);
-}
-  .nav__brand{
-  width: 200px
-}
-.nav__login-out{
-  /* width: 120px; */
-}
- .nav__brand{
-  padding-left: 1rem;
+.nav__brand{
+  width: 200px;
+  text-decoration: none;
+  color: white;
+  /* padding-left: 1rem; */
 }
 nav.main-nav{
   height: 70px;
+  min-height: 70px;
   width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: .25rem;
+  /* margin-top: 35px; */
+}
+
+a.nav-btn{
+  text-decoration: none;
+  font-size: 14px;
+}
+a.nav-btn:first-child{
+  margin-right: 1rem;
 }
 @media(max-width: 765px){
   nav.main-nav.loggedin{
-  height: 70px;
-  padding: 1rem;
-  /* margin-top: 1.5rem; */
+  margin-top: 2rem;
 }
 }
+
 </style>

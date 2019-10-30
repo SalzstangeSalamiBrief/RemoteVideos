@@ -50,6 +50,7 @@ module.exports = {
               'faPause',
               'faPlay',
               'faForward',
+              'faVolumeMute',
             ],
           },
         ],

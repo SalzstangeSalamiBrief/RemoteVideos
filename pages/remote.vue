@@ -1,6 +1,23 @@
 <template>
   <div>
-
+    <div class="center-item--horizontal svg-btn-container">
+      <button
+        v-if="!isMuted"
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        @click="sendKeyEvent('m')">
+        <fa
+          icon="volume-mute"
+          class="fa-1x"/>
+      </button>
+      <button
+        v-else
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        @click="sendKeyEvent('m')">
+        <fa
+          icon="volume-up"
+          class="fa-1x"/>
+      </button>
+    </div>
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
@@ -20,7 +37,7 @@
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn btn--pause-play center-item--vertical"
-        @click="sendKeyEvent('space')">
+        @click="sendKeyEvent('k')">
         <fa
           v-if="!isPaused"
           icon="pause"
@@ -77,13 +94,13 @@ export default {
   data () {
     return {
       isPaused: false,
+      isMuted: false,
     };
   },
   methods: {
     sendKeyEvent (key) {
-      if (key === 'space') {
-        this.isPaused = !this.isPaused;
-      }
+      if (['space', 'k'].includes(key)) this.isPaused = !this.isPaused;
+      if (key === 'm') this.isMuted = !this.isMuted;
       KeyHandler.sendKey(key, this.$store.state.userProfile.username);
     },
   },

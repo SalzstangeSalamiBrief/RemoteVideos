@@ -13,13 +13,12 @@ router.post('/sendKey', (req, res) => {
     if (key === 'shift-n') {
       // next in playlist
       keySender.sendCombination(['shift', 'n']);
-
       return;
     }
     keySender.sendKey(key);
   }
   res.send({ succ: true });
-  // no res needed
+  // !! Issue: node-key-sender has up to 1 second delay
 });
 
 module.exports = router;
