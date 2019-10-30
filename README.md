@@ -10,7 +10,7 @@ Let the server run in your WLAN on the same machine you want to watch Videos. Co
 
 ## Requirements
 
-- Python 2.7
+- Java 8
 - MongoDB
 - NodeJS
 
