@@ -70,7 +70,6 @@ nav.main-nav{
   justify-content: space-around;
   align-items: center;
   padding: .25rem;
-  /* margin-top: 35px; */
 }
 
 a.nav-btn{
