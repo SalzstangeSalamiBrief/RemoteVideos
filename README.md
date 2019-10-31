@@ -2,7 +2,7 @@
 
 > Remote App for Videoplayer
 
-This app is a remote control for HTML5 players. You can start/stop a video, enter/leave full screen and can skip to next video in a playlist.
+This app is a remote control for HTML5 players or the Netflix Player. You can start/stop a video, enter/leave full screen and can skip to next video in a playlist.
 
 ## Usage
 
