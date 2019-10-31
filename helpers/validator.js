@@ -48,6 +48,7 @@ class Validator {
       'shift-n',
       'k',
       'm',
+      's',
     ];
     return possibleKeys.includes(key);
   }

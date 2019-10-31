@@ -17,23 +17,13 @@
           icon="volume-up"
           class="fa-1x"/>
       </button>
-    </div>
-    <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('up')">
-        <fa
-          icon="volume-up"
-          class="fa-1x"/>
-      </button>
-      <button
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('down')">
-        <fa
-          icon="volume-down"
-          class="fa-1x"/>
+        @click="sendKeyEvent('s')">
+        Skip Intro
       </button>
     </div>
+
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn btn--pause-play center-item--vertical"

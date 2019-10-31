@@ -48,6 +48,7 @@ function validateKey (key) {
     'shift-n',
     'k',
     'm',
+    's'
   ];
   return possibleKeys.includes(key);
 }

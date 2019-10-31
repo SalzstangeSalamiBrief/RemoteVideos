@@ -18,7 +18,7 @@ router.post('/sendKey', (req, res) => {
     keySender.sendKey(key);
   }
   res.send({ succ: true });
-  // !! Issue: node-key-sender has up to 1 second delay
+  // !! Issue: node-key-sender has up to 1 second delayN
 });
 
 module.exports = router;

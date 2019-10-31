@@ -1,6 +1,5 @@
 <template>
   <nav
-    :class="{'loggedin': isLoggedIn}"
     class="nav-bg main-nav">
     <nuxt-link
       class="nav__brand text-xl font-semibold tracking-tight"
