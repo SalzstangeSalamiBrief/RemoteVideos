@@ -2,28 +2,18 @@
   <div>
     <div class="center-item--horizontal svg-btn-container">
       <button
-        v-if="!isMuted"
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('m')">
-        <fa
-          icon="volume-mute"
-          class="fa-1x"/>
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        @click="sendKeyEvent('f')">
+        <icon-fullscreen class="svg-white"/>
       </button>
       <button
-        v-else
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('m')">
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        @click="sendKeyEvent('shift-n')">
         <fa
-          icon="volume-up"
+          icon="forward"
           class="fa-1x"/>
-      </button>
-      <button
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('s')">
-        Skip Intro
       </button>
     </div>
-
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn btn--pause-play center-item--vertical"
@@ -52,17 +42,27 @@
     </div>
     <div class="center-item--horizontal svg-btn-container">
       <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('f')">
-        <icon-fullscreen class="svg-white"/>
-      </button>
-      <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('shift-n')">
+        v-if="!isMuted"
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        @click="sendKeyEvent('m')">
         <fa
-          icon="forward"
+          icon="volume-mute"
           class="fa-1x"/>
       </button>
+      <button
+        v-else
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        @click="sendKeyEvent('m')">
+        <fa
+          icon="volume-up"
+          class="fa-1x"/>
+      </button>
+      <!-- button for netflix player -->
+      <!-- <button
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        @click="sendKeyEvent('s')">
+        Skip Intro
+      </button> -->
     </div>
   </div>
 </template>
