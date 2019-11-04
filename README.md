@@ -32,11 +32,14 @@ $ npm i
 
 # serve for development
 $ npm run dev
+```
+```bash
 # build the project for production
 $ npm run build
 # launch the server
 $ npm start
-
+```
+```bash
 # generate static project
 $ npm run generate
 ```
