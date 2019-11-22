@@ -82,4 +82,4 @@ dist
 
 private.key
 public.key
-/server/private
+requestLogs.log
