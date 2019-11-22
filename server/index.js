@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
 const logger = require('morgan');
@@ -21,6 +23,11 @@ const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 9000;
 console.log(process.env.HOST);
 
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, './private/logs/', 'requestLogs.log'),
+  { flags: 'a' },
+);
+
 app.set('port', port);
 
 mongoose
@@ -33,7 +40,7 @@ mongoose
 
 // Give nuxt middleware to express
 
-app.use(logger('combined'));
+app.use(logger('combined', { stream: accessLogStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Listen the server
