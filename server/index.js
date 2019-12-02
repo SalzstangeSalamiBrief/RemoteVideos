@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CorsOptions = require('./config/CorsConfig');
 
-const UserRouter = require('./public/user/user.router');
-const KeyHandlerRouter = require('./public/key/key.router');
+const UserRouter = require('./resources/user/user.router');
+const KeyHandlerRouter = require('./resources/key/key.router');
 
 const { auth } = require('./middleware/auth');
 
