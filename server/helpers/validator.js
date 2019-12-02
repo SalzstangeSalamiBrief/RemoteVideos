@@ -8,7 +8,6 @@
  */
 function validatePassword (password) {
   // password does not have a length of 8 or more and does not match the pattern
-  return true;
   if (password) {
     const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
     if (securityPWRegexp.test(password)) {
@@ -24,7 +23,6 @@ function validatePassword (password) {
  */
 function validateUsername (username) {
   // username does not have a length of 8 or more and does not match the pattern
-  return true;
   if (username) {
     const securityUsernameRegexp = /^[a-zA-Z0-9]{8,20}$/;
     if (securityUsernameRegexp.test(username)) {
