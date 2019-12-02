@@ -10,8 +10,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CorsOptions = require('./config/CorsConfig');
 
-const RouteUser = require('./controller/User.js');
-const RouteKeyHandler = require('./controller/Key.js');
+const UserRouter = require('./controller/User.js');
+const KeyHandlerRouter = require('./public/key/key.router');
 
 const { auth } = require('./middleware/auth');
 
@@ -46,8 +46,8 @@ app.use(bodyParser.json());
 // Listen the server
 app.listen(port, host);
 
-app.use('/users', cors(CorsOptions), RouteUser);
-app.use('/keys', cors(CorsOptions), auth, RouteKeyHandler);
+app.use('/users', cors(CorsOptions), UserRouter);
+app.use('/keys', cors(CorsOptions), auth, KeyHandlerRouter);
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js');

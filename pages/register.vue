@@ -58,14 +58,13 @@ export default {
      * if the response from the server does have an err-key then the login failed. Else the login was successfully and the authtoken and the store get configured
      */
     async registerUser () {
-      console.log(')(');
       try {
-        const resp = await Register.registerUser(this.username, this.password);
-        if (resp.status === 200) {
-          this.$router.push('/login');
+        const status = await Register.registerUser(this.username, this.password);
+        if (parseInt(status, 10) !== 201) {
+          this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
           return;
         }
-        this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
+        this.$router.push('/login');
       } catch (error) {
         this.$store.dispatch('error/showError', 'Somethign went wrong. Please try again.');
       }

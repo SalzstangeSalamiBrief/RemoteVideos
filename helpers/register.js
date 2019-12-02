@@ -1,7 +1,7 @@
 /**
  * Class for registering a user
  */
-import Validator from './validator';
+// import Validator from './validator';
 
 class UserRegistration {
   constructor () {
@@ -16,12 +16,12 @@ class UserRegistration {
    * @param {String} password
    */
   async registerUser (username = '', password = '') {
-    if (!Validator.validateUsername(username)) {
-      return { err: 'Could not register this user' };
-    }
-    if (!Validator.validatePassword(password)) {
-      return { err: 'Could not register this user' };
-    }
+    // if (!Validator.validateUsername(username)) {
+    //   return { err: 'Could not register this user' };
+    // }
+    // if (!Validator.validatePassword(password)) {
+    //   return { err: 'Could not register this user' };
+    // }
     try {
       const response = await fetch(`${this.url}/users/register`, {
         method: 'POST',
@@ -31,12 +31,10 @@ class UserRegistration {
         },
         body: JSON.stringify({ username, password }),
       });
-      if (response.status !== 201) {
-        return { err: 'Could not register this user' };
-      }
-      return { succ: 'Register successfully' };
+      console.log(response.status);
+      return response.status;
     } catch (err) {
-      return { err: 'Could not register this user' };
+      return { err: 'Could not register this user 2' };
     }
   }
 }

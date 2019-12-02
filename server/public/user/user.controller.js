@@ -1,82 +1,62 @@
-const express = require('express');
-
-const router = express.Router();
-
-const { hashNewUser, checkPasswordHash } = require('../helpers/hashing');
-const { validatePassword, validateUsername } = require('../helpers/validator');
-const { findUserByName } = require('../db/queries/partial/user');
-const { generateJWTToken, verifyJWTToken } = require('../helpers/jwt');
-
-router.get('/', (req, res) => {
-  res.send('Hello World');
-});
+const { hashNewUser, checkPasswordHash } = require('../../helpers/hashing');
+const { validatePassword, validateUsername } = require('../../helpers/validator');
+const { findUserByName } = require('../../db/queries/partial/user');
+const { generateJWTToken, verifyJWTToken } = require('../../helpers/jwt');
 
 /**
- * Route for registering a new user
+ * Controller for registering a new user
  * @param {String} req.body.username
  * @param {String} req.body.password
  */
-router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  // user does not exist
+const createUserInDB = async ({ body: { username, password } }, res) => {
   const user = await findUserByName(username);
   if (!user) {
     // if the username is not valid
     if (!validateUsername()) {
-      return res.status(406).send({ err: 'Invalid username' });
+      return res.status(406).end();
     }
     // if the pw is not valid
     if (!validatePassword(password)) {
-      return res.status(406).send({ err: 'Invalid password' });
+      return res.status(406).end();
     }
     // hash user and send success answer
     hashNewUser(username, password);
-    return res.status(201).send({ success: 'User successfully registered' });
+    console.log('register succesfully');
+    return res.status(201).end();
   }
   // user already exists
-  return res.status(406).send({ err: 'User already exists' });
-});
+  return res.status(406).end();
+};
 
 /**
- * Route for logging out
+ * Controller for logging out
  * @param {String} req.body.username
  * @param {String} req.body.password
  */
-router.post('/login', async (req, res) => {
-  const { username } = req.body;
-  const { password } = req.body;
-  // invalid password
-  console.log(validatePassword(password));
+const logUserIn = async ({ body: { username, password } }, res) => {
   if (!validatePassword(password)) {
-    return res.status(406).send({ err: 'wrong credentials 1' });
+    return res.status(406).end();
   }
   console.log(validateUsername(username));
   if (!validateUsername(username)) {
-    return res.status(406).send({ err: 'wrong credentials 2' });
+    return res.status(406).end();
   }
   // const isValidPassword = await checkPasswordHash(username, password);
   // entered password does not match with the password in the db
   const pwHashCheck = await checkPasswordHash(username, password);
   if (!pwHashCheck) {
-    return res.status(406).send({ err: 'wrong credentials 3' });
+    return res.status(406).end();
   }
   // the password in the db and request are the same
-
   const token = generateJWTToken(username);
   return res.status(202).send({ token });
-});
-/**
- * Route for logging out
- * @param {String} req.body.username
- * @param {String} req.body.token
- */
+};
 
 /**
- * Route for checking, if the key of the user valid
- * @param {String} req.body.username
- * @param {String} req.body.token
+ * Controller for validatiing a JWT
+ * @param {*} req
  */
-router.post('/check-key', async (req, res) => {
+const validateJWT = async (req, res) => {
   const sendedToken = req.headers.authorization.split('Bearer ')[1];
   if (!sendedToken || !req.body.username) {
     return res.status(401).end({ isVerified: false });
@@ -95,6 +75,10 @@ router.post('/check-key', async (req, res) => {
     console.log(err);
     return res.status(401).send(false);
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  createUserInDB,
+  logUserIn,
+  validateJWT,
+};
