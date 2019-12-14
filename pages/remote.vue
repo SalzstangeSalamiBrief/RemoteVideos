@@ -83,7 +83,7 @@ export default {
   },
   data () {
     return {
-      isPaused: false,
+      isPaused: true,
       isMuted: false,
     };
   },
