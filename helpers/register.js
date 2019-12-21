@@ -4,7 +4,7 @@
 import Validator from './validator';
 
 class UserRegistration {
-  constructor () {
+  constructor() {
     this.url = `http://${process.env.HOST}:${process.env.PORT}`;
   }
 
@@ -15,7 +15,7 @@ class UserRegistration {
    * @param {String} username
    * @param {String} password
    */
-  async registerUser (username = '', password = '') {
+  async registerUser(username = '', password = '') {
     if (!Validator.validateUsername(username)) {
       return { err: 'Could not register this user' };
     }

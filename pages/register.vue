@@ -46,7 +46,7 @@
 import Register from '../helpers/register';
 
 export default {
-  data () {
+  data() {
     return {
       username: '',
       password: '',
@@ -57,7 +57,7 @@ export default {
      * function for logging a user in
      * if the response from the server does have an err-key then the login failed. Else the login was successfully and the authtoken and the store get configured
      */
-    async registerUser () {
+    async registerUser() {
       try {
         const status = await Register.registerUser(this.username, this.password);
         if (parseInt(status, 10) !== 201) {

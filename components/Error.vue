@@ -6,20 +6,20 @@
 <script>
 export default {
   computed: {
-    errorMSG () {
+    errorMSG() {
       return this.$store.state.error.errorMsg;
     },
-    showError () {
+    showError() {
       return this.$store.state.error.isActive;
     },
   },
 };
 </script>
 <style scoped>
-  .error{
+.error {
   border: 2px solid red;
   border-radius: 5px;
-    color: black;
+  color: black;
   background: white;
   min-height: 2rem;
   position: absolute;
@@ -30,8 +30,8 @@ export default {
   padding: 5px;
   z-index: 100;
 }
-@media(max-width: 756px){
-  .error{
+@media (max-width: 756px) {
+  .error {
     width: 95%;
   }
 }

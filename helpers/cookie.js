@@ -6,7 +6,7 @@ class Cookie {
    * set a cookie with the token of the user
    * @param {String} token
    */
-  setAuthToken (token, username) {
+  setAuthToken(token, username) {
     document.cookie = `RemoteVideosCookie=${JSON.stringify({
       token,
       username,
@@ -16,7 +16,7 @@ class Cookie {
   /**
    * get the authtoken from the cookie of this app
    */
-  getAuthToken () {
+  getAuthToken() {
     const cookieToGet = `; ${document.cookie}`;
     const parts = cookieToGet.split('; RemoteVideosCookie=');
     if (parts.length === 2) {
@@ -34,7 +34,7 @@ class Cookie {
   /**
    * delete the cookie
    */
-  deleteCookie () {
+  deleteCookie() {
     document.cookie = 'RemoteVideosCookie=;max-age=-1';
   }
 }

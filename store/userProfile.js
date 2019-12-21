@@ -4,17 +4,17 @@ export const state = () => ({
 });
 export const getters = {};
 export const mutations = {
-  login (state) {
+  login(state) {
     if (!state.isLoggedIn) {
       state.isLoggedIn = true;
     }
   },
-  logout (state) {
+  logout(state) {
     if (state.isLoggedIn) {
       state.isLoggedIn = false;
     }
   },
-  setUsername (state, payload) {
+  setUsername(state, payload) {
     state.username = payload;
   },
 };

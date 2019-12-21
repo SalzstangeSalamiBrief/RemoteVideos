@@ -4,17 +4,17 @@ export const state = () => ({
 });
 export const getters = {};
 export const mutations = {
-  showError (state, message) {
+  showError(state, message) {
     state.errorMsg = message;
     state.isActive = true;
   },
-  clearError (state) {
+  clearError(state) {
     state.isActive = false;
     state.errorMsg = '';
   },
 };
 export const actions = {
-  showError ({ commit }, errorMsg) {
+  showError({ commit }, errorMsg) {
     commit('showError', errorMsg);
     setTimeout(() => {
       commit('clearError');

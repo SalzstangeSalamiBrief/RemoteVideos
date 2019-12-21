@@ -47,7 +47,7 @@ import Login from '../helpers/login';
 import Cookie from '../helpers/cookie';
 
 export default {
-  data () {
+  data() {
     return {
       username: '',
       password: '',
@@ -58,7 +58,7 @@ export default {
      * function for logging a user in
      * if the response from the server does have an err-key then the login failed. Else the login was successfully and the authtoken and the store get configured
      */
-    async logUserIn () {
+    async logUserIn() {
       try {
         const resp = await Login.login(this.username, this.password);
         if (!resp.err) {

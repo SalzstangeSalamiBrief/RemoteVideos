@@ -2,12 +2,12 @@ import Validator from './validator';
 import CookieHandler from './cookie';
 
 class KeyHandler {
-  constructor () {
+  constructor() {
     // this.url = 'http://localhost:9000/keys';
     this.url = `http://${process.env.HOST}:${process.env.PORT}/keys`;
   }
 
-  async sendKey (key, username) {
+  async sendKey(key, username) {
     if (Validator.validateKey(key)) {
       try {
         fetch(`${this.url}/sendKey`, {

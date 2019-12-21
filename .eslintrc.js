@@ -19,11 +19,11 @@ module.exports = {
     'linebreak-style': [0, 'error', 'windows'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
-    'no-param-reassign': [2, { props: false }],
-    'no-shadow': ['error', { allow: ['state'] }],
+    'no-param-reassign': [2, {props: false}],
+    'no-shadow': ['error', {allow: ['state']}],
     'max-len': 'off',
     'class-methods-use-this': 'off',
     // 'space-after-function-name': ['error', 'always'],
-    'space-before-function-paren': ['error', 'always'],
+    // 'space-before-function-paren': ['error', 'always'],
   },
-}
+};

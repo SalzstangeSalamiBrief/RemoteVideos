@@ -5,7 +5,7 @@ import Validator from './validator';
 import Cookie from './cookie';
 
 class Login {
-  constructor () {
+  constructor() {
     this.loginURL = `http://${process.env.HOST}:${process.env.PORT}/users`;
   }
 
@@ -13,7 +13,7 @@ class Login {
    * check if the jwt is valid
    * @param {String} username
    */
-  async checkKey (passedUsername, passedToken) {
+  async checkKey(passedUsername, passedToken) {
     const credentials = { username: '', token: '' };
     if (passedUsername && passedToken) {
       credentials.username = passedUsername;
@@ -57,7 +57,7 @@ class Login {
    * @param {String} username
    * @param {String} password
    */
-  async login (username = '', password = '') {
+  async login(username = '', password = '') {
     if (!Validator.validateUsername(username)) {
       return false;
     }
@@ -84,7 +84,7 @@ class Login {
     return {};
   }
 
-  logout () {
+  logout() {
     return this.loginURL;
   }
 }

@@ -3,12 +3,12 @@
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('f')">
+        @click="sendKeyEvent('fullscreen')">
         <icon-fullscreen class="svg-white"/>
       </button>
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('shift-n')">
+        @click="sendKeyEvent('next')">
         <fa
           icon="forward"
           class="fa-1x"/>
@@ -17,7 +17,7 @@
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn btn--pause-play center-item--vertical"
-        @click="sendKeyEvent('k')">
+        @click="sendKeyEvent('play')">
         <fa
           v-if="!isPaused"
           icon="pause"
@@ -44,7 +44,7 @@
       <button
         v-if="!isMuted"
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('m')">
+        @click="sendKeyEvent('mute')">
         <fa
           icon="volume-mute"
           class="fa-1x"/>
@@ -52,7 +52,7 @@
       <button
         v-else
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('m')">
+        @click="sendKeyEvent('mute')">
         <fa
           icon="volume-up"
           class="fa-1x"/>
@@ -81,14 +81,16 @@ export default {
     IconTab,
     IconFullscreen,
   },
-  data () {
+  data() {
     return {
       isPaused: true,
       isMuted: false,
     };
   },
   methods: {
-    sendKeyEvent (key) {
+    sendKeyEvent(type) {
+      const { mode } = this.$store.state.modes;
+      const key = this.$store.state.modes.keys[mode][type];
       if (['space', 'k'].includes(key)) this.isPaused = !this.isPaused;
       if (key === 'm') this.isMuted = !this.isMuted;
       KeyHandler.sendKey(key, this.$store.state.userProfile.username);
