@@ -5,10 +5,13 @@ const mongoose = require('mongoose');
 // import models
 const UserModel = require('./models/user');
 
-function seedData() {
+function seedData () {
   connectToDB()
     .then(() => {
-      const testUser = new UserModel({username: 'testtest', password: 'testpassword'});
+      const testUser = new UserModel({
+        username: 'testtest',
+        password: 'testpassword',
+      });
       return testUser.save();
     })
     .then(() => disconnectFromDB())
@@ -17,13 +20,16 @@ function seedData() {
 /**
  * Function for connectiong to mongodb via mongoose
  */
-function connectToDB() {
+function connectToDB () {
   // connect mongoose
   return mongoose
-    .connect('mongodb://localhost/DungeonCleaner', {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-    })
+    .connect(
+      'mongodb://localhost/DungeonCleaner',
+      {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+      },
+    )
     .then(() => console.log('connected to mongoDB'))
     .catch(e => console.log(e));
 }
@@ -31,15 +37,15 @@ function connectToDB() {
 /**
  * function for disconnecting from mongodb via mongoose
  */
-function disconnectFromDB() {
+function disconnectFromDB () {
   return mongoose.disconnect();
 }
 
 /**
  * Function for dropping all collections
  */
-function clearDB() {
-  return new Promise(resolve => {
+function clearDB () {
+  return new Promise((resolve) => {
     mongoose.connection.db.dropDatabase();
     resolve(true);
   });

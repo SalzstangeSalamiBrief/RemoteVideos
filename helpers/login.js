@@ -29,7 +29,7 @@ class Login {
     }
     if (credentials.username !== '' && credentials.token !== '') {
       try {
-        const response = await fetch(`${this.loginURL}/check-key`, {
+        const response = await fetch(`${this.loginURL}/checkKey`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

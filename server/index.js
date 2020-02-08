@@ -46,6 +46,7 @@ app.use(bodyParser.json());
 // Listen the server
 app.listen(port, host);
 
+// TODO: check if the ip of the incoming request is out of this nw and got the same nw-submask. If not reject request
 app.use('/users', cors(CorsOptions), UserRouter);
 app.use('/keys', cors(CorsOptions), auth, KeyHandlerRouter);
 
