@@ -1,7 +1,7 @@
 import Login from '../helpers/login';
 
 export default function ({ store, redirect, req }) {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     // if the process is on the server redirect to login
     if (process.server && !req) return resolve();
     let tokenValidation;
@@ -25,6 +25,6 @@ export default function ({ store, redirect, req }) {
     }
     // default redirect to /
     // store.dispatch('error/showError', 'Invalid User. Please log in!');
-    return resolve(redirect('/'));
+    return reject();
   });
 }

@@ -41,7 +41,6 @@ const logUserIn = async ({ body: { username, password } }, res) => {
   if (!validateUsername(username)) {
     return res.status(406).end();
   }
-  // const isValidPassword = await checkPasswordHash(username, password);
   // entered password does not match with the password in the db
   const pwHashCheck = await checkPasswordHash(username, password);
   if (!pwHashCheck) {
@@ -54,7 +53,7 @@ const logUserIn = async ({ body: { username, password } }, res) => {
 
 /**
  * Controller for validatiing a JWT
- * @param {*} req
+ * @param {Object} req
  */
 const validateJWT = async (req, res) => {
   const sendedToken = req.headers.authorization.split('Bearer ')[1];
