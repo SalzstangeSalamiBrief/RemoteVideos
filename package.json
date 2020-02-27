@@ -4,7 +4,7 @@
   "description": "Remote App for Videoplayers",
   "author": "SalzstangeSalamiBrief",
   "private": true,
-  "license": "GNU GPL",
+  "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
