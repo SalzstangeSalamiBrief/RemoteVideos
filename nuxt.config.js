@@ -51,6 +51,7 @@ module.exports = {
               'faPlay',
               'faForward',
               'faVolumeMute',
+              'faStepBackward',
             ],
           },
         ],

@@ -49,6 +49,7 @@ class Validator {
       'k',
       'm',
       's',
+      '0',
     ];
     return possibleKeys.includes(key);
   }

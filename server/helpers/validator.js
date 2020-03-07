@@ -38,7 +38,7 @@ function validateUsername (username) {
  * @param {String} key
  */
 function validateKey (key) {
-  const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n', 'k', 'm', 's'];
+  const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n', 'k', 'm', 's', '0'];
   return possibleKeys.includes(key);
 }
 module.exports = {

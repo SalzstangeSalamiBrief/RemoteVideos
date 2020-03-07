@@ -29,7 +29,7 @@
       </button>
     </div>
     <div class="center-item--horizontal svg-btn-container">
-      <button
+      <!-- <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
         @click="sendKeyEvent('tab')">
         <icon-tab class="svg-white"/>
@@ -38,9 +38,17 @@
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
         @click="sendKeyEvent('enter')">
         <icon-enter class="svg-white"/>
-      </button>
+      </button> -->
     </div>
     <div class="center-item--horizontal svg-btn-container">
+      <button
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        @click="sendKeyEvent('0')">
+        <fa
+          icon="step-backward"
+          class="fa-1x"
+        />
+      </button>
       <button
         v-if="!isMuted"
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
