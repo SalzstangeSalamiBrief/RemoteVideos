@@ -3,10 +3,10 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true,
+    es6: true
   },
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 8
   },
   extends: ['airbnb-base', 'plugin:vue/recommended'],
   // required to lint *.vue files
@@ -24,7 +24,6 @@ module.exports = {
     'max-len': 'off',
     'class-methods-use-this': 'off',
     // 'space-after-function-name': ['error', 'always'],
-    'space-before-function-paren': ['error', 'always'],
-    'consistent-return': [0],
-  },
-};
+    'space-before-function-paren': ['error', 'always']
+  }
+}

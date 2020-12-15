@@ -20,7 +20,7 @@ const createUserInDB = async ({ body: { username, password } }, res) => {
       return res.status(406).end();
     }
     // hash user and send success answer
-    await hashNewUser(username, password);
+    hashNewUser(username, password);
     console.log('register succesfully');
     return res.status(201).end();
   }

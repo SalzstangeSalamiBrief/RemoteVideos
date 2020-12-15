@@ -1,7 +1,6 @@
-/* eslint-disable no-async-promise-executor */
 import Login from '../helpers/login';
 
-export default function AuthMiddleware ({ store, redirect, req }) {
+export default function ({ store, redirect, req }) {
   return new Promise(async (resolve, reject) => {
     // if the process is on the server redirect to login
     if (process.server && !req) return resolve();

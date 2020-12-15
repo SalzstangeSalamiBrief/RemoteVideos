@@ -1,36 +1,29 @@
 <template>
   <nav
-    class="nav-bg main-nav"
-  >
+    class="nav-bg main-nav">
     <nuxt-link
       class="nav__brand text-xl font-semibold tracking-tight"
       tag="a"
-      to="/"
-    >
-      RemoteVideos
-    </nuxt-link>
+      to="/">RemoteVideos</nuxt-link>
     <div class="nav__login-out center-item--horizontal">
       <nuxt-link
         v-if="isLoggedIn"
         class="btn text-white py-2 px-4 border border-white rounded nav-btn"
         tag="a"
-        to="/remote"
-      >
+        to="/remote">
         Controlls
       </nuxt-link>
       <nuxt-link
         v-if="!isLoggedIn"
         class="btn text-white py-2 px-4 border border-white rounded nav-btn"
         tag="a"
-        to="/login"
-      >
+        to="/login">
         Login
       </nuxt-link>
       <a
         v-else
         class="btn text-white py-2 px-4 border border-white rounded nav-btn"
-        @click="logOut"
-      >
+        @click="logOut">
         Logout
       </a>
     </div>

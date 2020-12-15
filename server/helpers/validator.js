@@ -1,16 +1,18 @@
 /**
  * File for functions which validate input
  */
-const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
-const securityUsernameRegexp = /^[a-zA-Z0-9]{8,20}$/;
-const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n', 'k', 'm', 's', '0'];
+
 /**
  * Validate if the password is valid
  * @param {String} password
  */
 function validatePassword (password) {
+  // password does not have a length of 8 or more and does not match the pattern
   if (password) {
-    return securityPWRegexp.test(password);
+    const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
+    if (securityPWRegexp.test(password)) {
+      return true;
+    }
   }
   return false;
 }
@@ -20,11 +22,14 @@ function validatePassword (password) {
  * @param {String} username
  */
 function validateUsername (username) {
-  console.log(username);
   // username does not have a length of 8 or more and does not match the pattern
   if (username) {
-    return securityUsernameRegexp.test(username);
+    const securityUsernameRegexp = /^[a-zA-Z0-9]{8,20}$/;
+    if (securityUsernameRegexp.test(username)) {
+      return true;
+    }
   }
+
   return false;
 }
 
@@ -33,6 +38,7 @@ function validateUsername (username) {
  * @param {String} key
  */
 function validateKey (key) {
+  const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n', 'k', 'm', 's', '0'];
   return possibleKeys.includes(key);
 }
 module.exports = {

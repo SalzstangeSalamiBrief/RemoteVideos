@@ -1,10 +1,10 @@
 <template>
   <div class="center-item--vertical full-screen">
-    <navigation />
+    <navigation/>
     <error />
+
     <main class="full-screen">
-      <nuxt class="relative pin" />
-    </main>
+    <nuxt class="relative pin"/></main>
   </div>
 </template>
 <script>
@@ -18,6 +18,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 </style>
