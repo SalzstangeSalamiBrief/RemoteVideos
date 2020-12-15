@@ -3,29 +3,35 @@
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('f')">
-        <icon-fullscreen class="svg-white"/>
+        @click="sendKeyEvent('f')"
+      >
+        <icon-fullscreen class="svg-white" />
       </button>
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('shift-n')">
+        @click="sendKeyEvent('shift-n')"
+      >
         <fa
           icon="forward"
-          class="fa-1x"/>
+          class="fa-1x"
+        />
       </button>
     </div>
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn btn--pause-play center-item--vertical"
-        @click="sendKeyEvent('k')">
+        @click="sendKeyEvent('k')"
+      >
         <fa
           v-if="!isPaused"
           icon="pause"
-          class="fa-4x"/>
+          class="fa-4x"
+        />
         <fa
           v-if="isPaused"
           icon="play"
-          class="fa-4x"/>
+          class="fa-4x"
+        />
       </button>
     </div>
     <div class="center-item--horizontal svg-btn-container">
@@ -43,7 +49,8 @@
     <div class="center-item--horizontal svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('0')">
+        @click="sendKeyEvent('0')"
+      >
         <fa
           icon="step-backward"
           class="fa-1x"
@@ -52,18 +59,22 @@
       <button
         v-if="!isMuted"
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('m')">
+        @click="sendKeyEvent('m')"
+      >
         <fa
           icon="volume-mute"
-          class="fa-1x"/>
+          class="fa-1x"
+        />
       </button>
       <button
         v-else
         class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('m')">
+        @click="sendKeyEvent('m')"
+      >
         <fa
           icon="volume-up"
-          class="fa-1x"/>
+          class="fa-1x"
+        />
       </button>
       <!-- button for netflix player -->
       <!-- <button
@@ -75,20 +86,20 @@
   </div>
 </template>
 <script>
-import IconEnter from '../static/iconEnter.svg';
+// import IconEnter from '../static/iconEnter.svg';
 import IconFullscreen from '../static/iconFullscreen.svg';
-import IconTab from '../static/iconTab.svg';
+// import IconTab from '../static/iconTab.svg';
 
 // import Login from '../helpers/login';
 import KeyHandler from '../helpers/key';
 
 export default {
-  middleware: 'auth',
   components: {
-    IconEnter,
-    IconTab,
+    // IconEnter,
+    // IconTab,
     IconFullscreen,
   },
+  middleware: 'auth',
   data () {
     return {
       isPaused: true,

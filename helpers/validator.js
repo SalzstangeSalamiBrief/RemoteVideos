@@ -12,12 +12,7 @@ class Validator {
    * @param {String} password
    */
   validatePassword (password) {
-    if (password) {
-      if (!this.passwordRegexp.test(password)) {
-        return false;
-      }
-    }
-    return true;
+    return this.passwordRegexp.test(password);
   }
 
   /**
@@ -25,12 +20,7 @@ class Validator {
    * @param {String} username
    */
   validateUsername (username) {
-    if (username) {
-      if (!this.usernameRegexp.test(username)) {
-        return false;
-      }
-    }
-    return true;
+    return this.usernameRegexp.test(username);
   }
 
   /**

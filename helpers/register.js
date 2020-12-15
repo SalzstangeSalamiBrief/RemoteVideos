@@ -16,26 +16,26 @@ class UserRegistration {
    * @param {String} password
    */
   async registerUser (username = '', password = '') {
-    if (!Validator.validateUsername(username)) {
-      return { err: 'Could not register this user' };
+    const isUsernameValid = Validator.validateUsername(username);
+    const isPasswordValid = Validator.validatePassword(password);
+    console.log(isUsernameValid, isPasswordValid);
+    if (isUsernameValid && isPasswordValid) {
+      try {
+        const response = await fetch(`${this.url}/users/register`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+        console.log(response.status);
+        return response.status;
+      } catch (err) {
+        return { err: 'Could not register this user 2' };
+      }
     }
-    if (!Validator.validatePassword(password)) {
-      return { err: 'Could not register this user' };
-    }
-    try {
-      const response = await fetch(`${this.url}/users/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      console.log(response.status);
-      return response.status;
-    } catch (err) {
-      return { err: 'Could not register this user 2' };
-    }
+    return { err: 'Could not register this user' };
   }
 }
 

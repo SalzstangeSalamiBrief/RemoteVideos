@@ -1,7 +1,10 @@
 <template>
   <div
     v-if="showError"
-    class="error  center-item--vertical">{{ errorMSG }}</div>
+    class="error  center-item--vertical"
+  >
+    {{ errorMSG }}
+  </div>
 </template>
 <script>
 export default {
