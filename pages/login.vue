@@ -3,7 +3,7 @@
     <form
       class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
     >
-      <h1 class="center-item--vertical text-grey-darker mb-5">
+      <h1 class="flex flex-col  justify-center items-center text-grey-darker mb-5">
         Login
       </h1>
       <div class="mb-4">

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="showError"
-    class="error  center-item--vertical"
+    class="error  flex flex-col  justify-center items-center"
   >
     {{ errorMSG }}
   </div>

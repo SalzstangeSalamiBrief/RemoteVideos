@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="center-item--horizontal svg-btn-container">
+    <div class="flex justify-center items-center svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
         @click="sendKeyEvent('f')"
@@ -17,9 +17,9 @@
         />
       </button>
     </div>
-    <div class="center-item--horizontal svg-btn-container">
+    <div class="flex justify-center items-center svg-btn-container">
       <button
-        class="btn btn--pause-play center-item--vertical"
+        class="btn btn--pause-play flex flex-col  justify-center items-center"
         @click="sendKeyEvent('k')"
       >
         <fa
@@ -34,7 +34,7 @@
         />
       </button>
     </div>
-    <div class="center-item--horizontal svg-btn-container">
+    <div class="flex justify-center items-center svg-btn-container">
       <!-- <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
         @click="sendKeyEvent('tab')">
@@ -46,7 +46,7 @@
         <icon-enter class="svg-white"/>
       </button> -->
     </div>
-    <div class="center-item--horizontal svg-btn-container">
+    <div class="flex justify-center items-center svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
         @click="sendKeyEvent('0')"

@@ -1,15 +1,15 @@
 <template>
   <nav
-    class="nav-bg main-nav"
+    class="nav-bg flex justify-between items-center h-12 w-full px-2 py-4"
   >
     <nuxt-link
-      class="nav__brand text-xl font-semibold tracking-tight"
+      class="h-8 text-white text-xl font-semibold"
       tag="a"
       to="/"
     >
       RemoteVideos
     </nuxt-link>
-    <div class="nav__login-out center-item--horizontal">
+    <div class="nav__login-out flex justify-center items-center">
       <nuxt-link
         v-if="isLoggedIn"
         class="btn text-white py-2 px-4 border border-white rounded nav-btn"
@@ -62,13 +62,7 @@ export default {
 .nav-bg{
   background: var(--nav--bg-color);
 }
-.nav__brand{
-  width: 200px;
-  text-decoration: none;
-  color: white;
-  /* padding-left: 1rem; */
-}
-nav.main-nav{
+/* nav.main-nav{
   height: 70px;
   min-height: 70px;
   width: 100vw;
@@ -76,7 +70,7 @@ nav.main-nav{
   justify-content: space-around;
   align-items: center;
   padding: .25rem;
-}
+} */
 
 a.nav-btn{
   text-decoration: none;

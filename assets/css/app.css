@@ -44,18 +44,6 @@ html {
 }
 
 /*Helper functions*/
-.center-item--horizontal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.center-item--vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
 .full-width {
   width: 100%;

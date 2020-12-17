@@ -1,7 +1,7 @@
 <template>
   <section>
-    <div class="padding-1">
-      <h1 class="title center-item--horizontal mb-3">
+    <div class="p-1">
+      <h1 class="flex justify-center items-center mb-3">
         RemoteVideos
       </h1>
       <p>
