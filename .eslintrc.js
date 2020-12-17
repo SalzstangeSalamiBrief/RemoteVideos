@@ -27,7 +27,13 @@ module.exports = {
     'max-len': 'off',
     'class-methods-use-this': 'off',
     // 'space-after-function-name': ['error', 'always'],
+<<<<<<< HEAD
     'space-before-function-paren': ['error', 'always'],
     'consistent-return': [0],
   },
 };
+=======
+    'space-before-function-paren': ['error', 'always']
+  }
+}
+>>>>>>> 47ee7a52eaee52db54186cad93735873904ecee8
