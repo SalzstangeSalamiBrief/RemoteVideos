@@ -7,6 +7,6 @@ router.route('/register').post(controller.createUserInDB);
 
 router.route('/login').post(controller.logUserIn);
 
-router.route('/checkKey').post(controller.validateJWT);
+router.route('/checkToken').post(controller.validateJWT);
 
 module.exports = router;

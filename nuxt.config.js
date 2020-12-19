@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
+const { HOST, PORT_FRONTEND, PORT_BACKEND } = process.env;
 
 export default {
   /*
@@ -97,7 +98,11 @@ export default {
   build: {
   },
   server: {
-    host: process.env.HOST || 'http://127.0.0.1:9000',
-    port: process.env.PORT_FRONTEND || '9000',
+    host: HOST || 'http://127.0.0.1:9000',
+    port: PORT_FRONTEND || '9000',
+  },
+  env: {
+    PORT_BACKEND,
+    HOST,
   },
 };

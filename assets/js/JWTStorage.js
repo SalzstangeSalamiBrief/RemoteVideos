@@ -1,12 +1,13 @@
 /**
  * file for the localstorage
  */
-class Cookie {
+class JWTStorage {
   /**
    * set a cookie with the token of the user
    * @param {String} token
    */
   setAuthToken (token, username) {
+    // set expiration date for a week
     document.cookie = `RemoteVideosCookie=${JSON.stringify({
       token,
       username,
@@ -28,15 +29,15 @@ class Cookie {
         return JSON.parse(match);
       }
     }
-    return undefined;
+    return { username: '', token: '' };
   }
 
   /**
    * delete the cookie
    */
-  deleteCookie () {
+  clearStorage () {
     document.cookie = 'RemoteVideosCookie=;max-age=-1';
   }
 }
 
-export default new Cookie();
+export default new JWTStorage();

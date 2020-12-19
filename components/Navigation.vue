@@ -12,7 +12,7 @@
     <div class="nav__login-out flex justify-center items-center">
       <nuxt-link
         v-if="isLoggedIn"
-        class="btn text-white py-2 px-4 border border-white rounded nav-btn"
+        class="btn text-white py-2 px-4 border border-white rounded mr-4"
         tag="a"
         to="/remote"
       >
@@ -20,7 +20,7 @@
       </nuxt-link>
       <nuxt-link
         v-if="!isLoggedIn"
-        class="btn text-white py-2 px-4 border border-white rounded nav-btn"
+        class="btn text-white py-2 px-4 border border-white rounded"
         tag="a"
         to="/login"
       >
@@ -28,7 +28,7 @@
       </nuxt-link>
       <a
         v-else
-        class="btn text-white py-2 px-4 border border-white rounded nav-btn"
+        class="btn text-white py-2 px-4 border border-white rounded"
         @click="logOut"
       >
         Logout
@@ -37,7 +37,7 @@
   </nav>
 </template>
 <script>
-import Cookie from '../assets/js/cookie';
+import JWTStorage from '../assets/js/JWTStorage';
 
 export default {
   computed: {
@@ -50,10 +50,11 @@ export default {
      * log the user out of the app
      */
     logOut () {
-      Cookie.deleteCookie();
       this.$store.commit('userProfile/logout');
+      JWTStorage.clearStorage();
       //  bugfix
-      window.location.href = `http://${process.env.HOST}:${process.env.PORT}/`;
+      this.$router.push('/');
+      // window.location.href = `http://${process.env.HOST}:${process.env.PORT}/`;
     },
   },
 };
@@ -62,23 +63,7 @@ export default {
 .nav-bg{
   background: var(--nav--bg-color);
 }
-/* nav.main-nav{
-  height: 70px;
-  min-height: 70px;
-  width: 100vw;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: .25rem;
-} */
 
-a.nav-btn{
-  text-decoration: none;
-  font-size: 14px;
-}
-a.nav-btn:first-child{
-  margin-right: 1rem;
-}
 @media(max-width: 765px){
   nav.main-nav.loggedin{
   margin-top: 2rem;

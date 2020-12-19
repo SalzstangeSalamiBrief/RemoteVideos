@@ -9,7 +9,6 @@ const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n', 'k'
  * @param {String} password
  */
 function validatePassword (password) {
-  console.log(password);
   // password does not have a length of 8 or more and does not match the pattern
   if (password) {
     return securityPWRegexp.test(password);
@@ -22,7 +21,6 @@ function validatePassword (password) {
  * @param {String} username
  */
 function validateUsername (username) {
-  console.log(username);
   // username does not have a length of 8 or more and does not match the pattern
   if (username) {
     return securityUsernameRegexp.test(username);

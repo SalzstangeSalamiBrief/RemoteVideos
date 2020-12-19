@@ -1,10 +1,10 @@
 import Validator from './validator';
-import CookieHandler from './cookie';
+import JWTStorage from './JWTStorage';
 
 class KeyHandler {
   constructor () {
     // this.url = 'http://localhost:9000/keys';
-    this.url = `http://${process.env.HOST}:${process.env.PORT}/api/keys`;
+    this.url = `http://${process.env.HOST}:${process.env.PORT_BACKEND}/keys`;
   }
 
   async sendKey (key, username) {
@@ -16,11 +16,11 @@ class KeyHandler {
           body: JSON.stringify({
             key,
             username,
-            token: CookieHandler.getAuthToken(),
+            token: JWTStorage.getAuthToken().token,
           }),
         });
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     }
   }

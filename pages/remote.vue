@@ -34,8 +34,8 @@
         />
       </button>
     </div>
-    <div class="flex justify-center items-center svg-btn-container">
-      <!-- <button
+    <!-- <div class="flex justify-center items-center svg-btn-container"> -->
+    <!-- <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
         @click="sendKeyEvent('tab')">
         <icon-tab class="svg-white"/>
@@ -45,7 +45,7 @@
         @click="sendKeyEvent('enter')">
         <icon-enter class="svg-white"/>
       </button> -->
-    </div>
+    <!-- </div> -->
     <div class="flex justify-center items-center svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
@@ -76,12 +76,6 @@
           class="fa-1x"
         />
       </button>
-      <!-- button for netflix player -->
-      <!-- <button
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
-        @click="sendKeyEvent('s')">
-        Skip Intro
-      </button> -->
     </div>
   </div>
 </template>
@@ -90,7 +84,6 @@
 import IconFullscreen from '../static/iconFullscreen.svg';
 // import IconTab from '../static/iconTab.svg';
 
-// import Login from '../helpers/login';
 import KeyHandler from '../assets/js/key';
 
 export default {
@@ -99,7 +92,7 @@ export default {
     // IconTab,
     IconFullscreen,
   },
-  middleware: 'auth',
+  // middleware: 'auth',
   data () {
     return {
       isPaused: true,

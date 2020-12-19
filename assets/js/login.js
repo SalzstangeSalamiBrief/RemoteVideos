@@ -2,49 +2,54 @@
  * Class for the login and logout feature
  */
 import Validator from './validator';
-import Cookie from './cookie';
+import JWTStorage from './JWTStorage';
 
 class Login {
   constructor () {
-    this.loginURL = `http://${process.env.HOST}:${process.env.PORT}/api/users`;
+    this.loginURL = `http://${process.env.HOST}:${process.env.PORT_BACKEND}/users`;
   }
 
   /**
    * check if the jwt is valid
    * @param {String} username
    */
-  async checkKey (passedUsername, passedToken) {
-    const credentials = { username: '', token: '' };
-    if (passedUsername && passedToken) {
-      credentials.username = passedUsername;
-      credentials.token = passedToken;
-    } else {
+  // async checkKey (username, token) {
+  async checkKey (username, token) {
+    if (username && token) {
       try {
-        const { token, username } = Cookie.getAuthToken();
-        credentials.username = username;
-        credentials.token = token;
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
-    await this.postKey(credentials);
-  }
-
-  async postKey (credentials) {
-    const areCredentialsValid = credentials.username !== '' && credentials.token !== '';
-    if (areCredentialsValid) {
-      try {
-        const response = await fetch(`${this.loginURL}/checkKey`, {
+        const response = await fetch(`${this.loginURL}/checkToken`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
-            Authorization: `Bearer ${credentials.token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            username: credentials.username,
-            password: credentials.password,
+            username,
+          }),
+        });
+        return response.status === 202;
+      } catch (err) {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  async postKey (username, password, token) {
+    const areCredentialsValid = username && token && password;
+    if (areCredentialsValid) {
+      try {
+        const response = await fetch(`${this.loginURL}/checkToken`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            username,
+            password,
           }),
         });
         return response.status === 202;
@@ -61,30 +66,28 @@ class Login {
    * @param {String} password
    */
   async login (username = '', password = '') {
-    if (!Validator.validateUsername(username)) {
-      return false;
-    }
-    if (!Validator.validatePassword(password)) {
-      return false;
-    }
-    try {
-      const response = await fetch(`${this.loginURL}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      if (response.status !== 202) {
-        return { err: 'Invalid Credentials' };
+    const areParamsValid = Validator.validateUsername(username) && Validator.validatePassword(password);
+    if (areParamsValid) {
+      try {
+        const response = await fetch(`${this.loginURL}/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+        if (response.status !== 202) {
+          return { error: 'Invalid Credentials' };
+        }
+        const { token } = await response.json();
+        JWTStorage.setAuthToken(token, username);
+        return { token };
+      } catch (err) {
+        console.log(err);
       }
-      const content = await response.json();
-      return content;
-    } catch (err) {
-      console.log(err);
     }
-    return {};
+    return false;
   }
 
   logout () {

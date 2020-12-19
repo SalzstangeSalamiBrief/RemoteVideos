@@ -10,9 +10,8 @@ export const mutations = {
     }
   },
   logout (state) {
-    if (state.isLoggedIn) {
-      state.isLoggedIn = false;
-    }
+    state.isLoggedIn = false;
+    state.username = '';
   },
   setUsername (state, payload) {
     state.username = payload;

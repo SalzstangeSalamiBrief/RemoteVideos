@@ -9,10 +9,10 @@ const { generateJWTToken, verifyJWTToken } = require('../helpers/jwt');
  * @param {String} req.body.password
  */
 async function createUserInDB ({ body: { username, password } }, res) {
+  console.log(username, password);
   const doesUserAlreadyExist = await findUserByName(username);
   const isUsernameValid = validateUsername(username);
   const isPasswordValid = validatePassword(password);
-
   if (!doesUserAlreadyExist && isUsernameValid && isPasswordValid) {
     await hashNewUser(username, password);
     console.log('register successfully');

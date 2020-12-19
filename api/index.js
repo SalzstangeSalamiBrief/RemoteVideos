@@ -31,7 +31,7 @@ app.set('port', port);
 mongoose
   .connect(
     'mongodb://localhost/RemoteVideos',
-    { useNewUrlParser: true, useCreateIndex: true },
+    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
   )
   .then(() => console.log('connected to MongoDB'))
   .catch((e) => console.log(e));

@@ -60,7 +60,7 @@
 </template>
 <script>
 import Login from '../assets/js/login';
-import Cookie from '../assets/js/cookie';
+import JWTStorage from '../assets/js/JWTStorage';
 
 export default {
   data () {
@@ -76,16 +76,19 @@ export default {
      */
     async logUserIn () {
       try {
-        const resp = await Login.login(this.username, this.password);
-        if (!resp.err) {
-          Cookie.setAuthToken(resp.token, this.username);
-          this.$store.commit('userProfile/login');
-          this.$store.commit('userProfile/setUsername', this.username);
-          this.$router.push('/remote');
+        const { error } = await Login.login(this.username, this.password);
+        console.log('NICA SHCEI?=');
+        console.log(error);
+        console.log('--------------');
+        // TODO: redirect
+        if (error) {
+          this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
+          JWTStorage.clearStorage();
           return;
         }
-        this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
-        Cookie.deleteCookie();
+        this.$store.commit('userProfile/login');
+        this.$store.commit('userProfile/setUsername', this.username);
+        this.$router.push('/remote');
       } catch (err) {
         this.$store.dispatch('error/showError', 'Something went wrong. Please try again.');
       }

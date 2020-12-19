@@ -43,25 +43,7 @@ html {
   transition-duration: 0.5s;
 }
 
-/*Helper functions*/
-
-.full-width {
-  width: 100%;
-}
-
-.full-height {
-  height: 100%;
-}
-
-.padding-1 {
-  padding: 1rem;
-}
-
 .capitalize-text {
   text-transform: capitalize;
 }
 
-.full-screen {
-  width: 100vw;
-  height: calc(100vh - 79.72px);
-}

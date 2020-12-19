@@ -17,6 +17,7 @@ export default {
     Navigation,
     Error,
   },
+  middleware: 'auth',
 };
 </script>
 

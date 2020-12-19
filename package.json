@@ -1,7 +1,7 @@
 {
   "name": "name",
-  "version": "1.0.0",
-  "description": "Nuxt.js project",
+  "version": "1.0.1",
+  "description": "Remote Video",
   "author": "SalzstangeSalamiBrief",
   "private": true,
   "scripts": {

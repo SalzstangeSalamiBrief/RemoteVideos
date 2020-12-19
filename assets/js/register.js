@@ -5,7 +5,7 @@ import Validator from './validator';
 
 class UserRegistration {
   constructor () {
-    this.url = `http://${process.env.HOST}:${process.env.PORT}`;
+    this.url = `http://${process.env.HOST}:${process.env.PORT_BACKEND}`;
   }
 
   /**
@@ -21,7 +21,7 @@ class UserRegistration {
     console.log(isUsernameValid, isPasswordValid);
     if (isUsernameValid && isPasswordValid) {
       try {
-        const response = await fetch(`${this.url}/api/users/register`, {
+        const response = await fetch(`${this.url}/users/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
