@@ -1,15 +1,18 @@
 /**
- * File for functions which validate input
+ * Regex for validating the password, username
+ * The username has to contain between 8 and 20 characters/numbers
+ * The password has to contain at least 8 characters/symbols/numbers
  */
-const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
 const securityUsernameRegexp = /^[a-zA-Z0-9]{8,20}$/;
+const securityPWRegexp = /^([a-zA-Z0-9]|[$%&/()\\=\][{}]){8,}$/;
+// list of allowed keys
 const possibleKeys = ['space', 'tab', 'enter', 'up', 'down', 'f', 'shift-n', 'k', 'm', 's', '0'];
+
 /**
  * Validate if the password is valid
  * @param {String} password
  */
 function validatePassword (password) {
-  // password does not have a length of 8 or more and does not match the pattern
   if (password) {
     return securityPWRegexp.test(password);
   }
@@ -29,7 +32,7 @@ function validateUsername (username) {
 }
 
 /**
- * validate if the given is valid
+ * validate if the passed key is valid
  * @param {String} key
  */
 function validateKey (key) {

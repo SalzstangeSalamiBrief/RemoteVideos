@@ -5,6 +5,9 @@ const { generateJWTToken, verifyJWTToken } = require('../helpers/jwt');
 
 /**
  * Controller for registering a new user
+ * If the credentials in the body (username and password)
+ *  are valid and the username does not already exist
+ *  then a new user is created
  * @param {String} req.body.username
  * @param {String} req.body.password
  */
@@ -22,7 +25,12 @@ async function createUserInDB ({ body: { username, password } }, res) {
 }
 
 /**
- * Controller for logging out
+ * Controller for logging in
+ * If the username and password of the req-body are valid
+ *  then the server checks if the credentials are valid by
+ *  hashing them and compare the result with the hashed data
+ *  in the database
+ * If the checks pass, then sign and send back a new jwt-token
  * @param {String} req.body.username
  * @param {String} req.body.password
  */
@@ -30,22 +38,23 @@ async function logUserIn ({ body: { username, password } }, res) {
   const isUsernameValid = validateUsername(username);
   const isPasswordValid = validatePassword(password);
   if (isUsernameValid && isPasswordValid) {
-  // entered password does not match with the password in the db
-    const pwHashCheck = await checkPasswordHash(username, password);
-    if (!pwHashCheck) {
-      return res.status(406).end();
+    const doCredentialsMatch = await checkPasswordHash(username, password);
+    if (doCredentialsMatch) {
+      const token = generateJWTToken(username);
+      return res.status(202).send({ token });
     }
-    // the password in the db and request are the same
-    const token = generateJWTToken(username);
-    return res.status(202).send({ token });
   }
-
   return res.status(406).end();
 }
 
 /**
- * Controller for validatiing a JWT
- * @param {Object} req
+ * Function for validation of a jwt token
+ * In the Request-Header the field authorization with a string
+ *  of the format `Bearer ${token}` is required.
+ * The Body requires the username
+ * Verifies the sended token and username and send a true or false back
+ * @param {String} req.headers.authorization
+ * @param {String} req.body.username
  */
 async function validateJWT ({ headers: { authorization }, body: { username } }, res) {
   const sendedToken = authorization.split('Bearer ')[1];
@@ -59,14 +68,11 @@ async function validateJWT ({ headers: { authorization }, body: { username } }, 
         if (isVerified) {
           return res.status(202).send({ isVerified });
         }
-        return res.status(401).send({ isVerified });
       } catch (err) {
         console.log(err);
-        return res.status(401).send(false);
       }
     }
   }
-
   return res.status(401).end({ isVerified: false });
 }
 

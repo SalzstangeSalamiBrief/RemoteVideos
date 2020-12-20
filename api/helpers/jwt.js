@@ -21,7 +21,6 @@ function generateJWTToken (username) {
   return jwt.sign(payload, privateKey, signOptions);
 }
 
-// verifyJWTToken(req.body.username, req.body.token)
 /**
  * Verifies if the token owns to the user
  * @param {String} username
