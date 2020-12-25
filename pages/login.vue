@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full max-w-xs login-container text-black">
+  <div class="w-full max-w-xs login-container text-white main-bg">
     <form
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="rounded px-8 pt-6 pb-8 mb-4"
     >
-      <h1 class="flex flex-col  justify-center items-center text-grey-darker mb-5">
+      <h1 class="flex flex-col text-xl font-bold  justify-center items-center text-grey-darker mb-5">
         Login
       </h1>
       <div class="mb-4">
@@ -16,7 +16,7 @@
         <input
           id="username"
           v-model="username"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-white"
           type="text"
           placeholder="Username"
         >
@@ -31,17 +31,17 @@
         <input
           id="password"
           v-model="password"
-          class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           placeholder="******************"
         >
-        <p class="text-red text-xs italic">
+        <p class="text-red-100 text-xs italic">
           Please enter a password.
         </p>
       </div>
       <div class="flex items-center justify-between">
         <button
-          class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          class="text-white border border-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           to="/login"
           @click.prevent="logUserIn"
         >
@@ -49,7 +49,7 @@
         </button>
         <nuxt-link
           tag="a"
-          class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker"
+          class="inline-block align-baseline font-bold text-sm text-white hover:text-blue-400"
           to="/register"
         >
           Register yourself
@@ -61,8 +61,11 @@
 <script>
 import Login from '../assets/js/login';
 import JWTStorage from '../assets/js/JWTStorage';
+import ErrorMixin from '../mixins/error-mixin';
 
 export default {
+  name: 'Login',
+  mixins: [ErrorMixin],
   data () {
     return {
       username: '',
@@ -79,11 +82,13 @@ export default {
         const { error } = await Login.login(this.username, this.password);
         if (error) {
           this.displayError('Invalid credentials. Please try something other.');
+          JWTStorage.clearStorage();
         } else {
           this.commitUserLogin();
         }
       } catch (err) {
         this.displayError('Something went wrong. Please try again.');
+        JWTStorage.clearStorage();
       }
     },
     /**
@@ -95,16 +100,6 @@ export default {
       this.$store.commit('userProfile/login');
       this.$store.commit('userProfile/setUsername', this.username);
       this.$router.push('/remote');
-    },
-    /**
-     * display a passed msg as error for a failed login
-     * in addition to that clear the jwtStorage
-     */
-    displayError (msg) {
-      if (msg) {
-        this.$store.dispatch('error/showError', msg);
-        JWTStorage.clearStorage();
-      }
     },
   },
 };

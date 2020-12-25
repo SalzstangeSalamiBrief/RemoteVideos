@@ -25,17 +25,12 @@ class Login {
   async checkKey (username, token) {
     if (username && token) {
       try {
-        const response = await fetch(`${this.loginURL}/checkToken`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            username,
-          }),
+        const options = { ...this.fetchOptions };
+        options.headers.Authorization = `Bearer ${token}`;
+        options.body = JSON.stringify({
+          username,
         });
+        const response = await fetch(`${this.loginURL}/checkToken`, options);
         return response.status === 202;
       } catch (err) {
         return false;
@@ -54,6 +49,7 @@ class Login {
         password,
       });
       try {
+        console.log(options);
         const response = await fetch(`${this.loginURL}/checkToken`, options);
         return response.status === 202;
       } catch (err) {
@@ -71,15 +67,10 @@ class Login {
   async login (username = '', password = '') {
     const areParamsValid = Validator.validateUsername(username) && Validator.validatePassword(password);
     if (areParamsValid) {
+      const options = { ...this.fetchOptions };
+      options.body = JSON.stringify({ username, password });
       try {
-        const response = await fetch(`${this.loginURL}/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-        });
+        const response = await fetch(`${this.loginURL}/login`, options);
         if (response.status !== 202) {
           return { error: 'Invalid Credentials' };
         }

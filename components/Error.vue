@@ -8,6 +8,7 @@
 </template>
 <script>
 export default {
+  name: 'Error',
   computed: {
     errorMSG () {
       return this.$store.state.error.errorMsg;

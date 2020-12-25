@@ -9,14 +9,17 @@ class KeyHandler {
 
   async sendKey (key, username) {
     if (Validator.validateKey(key)) {
+      const { token } = JWTStorage.getAuthToken();
       try {
         fetch(`${this.url}/sendKey`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify({
             key,
             username,
-            token: JWTStorage.getAuthToken().token,
           }),
         });
       } catch (err) {

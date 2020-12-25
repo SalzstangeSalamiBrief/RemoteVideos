@@ -34,18 +34,6 @@
         />
       </button>
     </div>
-    <!-- <div class="flex justify-center items-center svg-btn-container"> -->
-    <!-- <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('tab')">
-        <icon-tab class="svg-white"/>
-      </button>
-      <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
-        @click="sendKeyEvent('enter')">
-        <icon-enter class="svg-white"/>
-      </button> -->
-    <!-- </div> -->
     <div class="flex justify-center items-center svg-btn-container">
       <button
         class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
@@ -80,19 +68,16 @@
   </div>
 </template>
 <script>
-// import IconEnter from '../static/iconEnter.svg';
+
 import IconFullscreen from '../static/iconFullscreen.svg';
-// import IconTab from '../static/iconTab.svg';
 
 import KeyHandler from '../assets/js/key';
 
 export default {
+  name: 'Remote',
   components: {
-    // IconEnter,
-    // IconTab,
     IconFullscreen,
   },
-  // middleware: 'auth',
   data () {
     return {
       isPaused: true,

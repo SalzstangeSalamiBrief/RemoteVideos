@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full max-w-xs login-container">
+  <div class="w-full max-w-xs login-container  main-bg">
     <form
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      class="rounded px-8 pt-6 pb-8 mb-4"
     >
-      <h1 class="flex flex-col  justify-center items-center text-grey-darker mb-5">
+      <h1 class="flex flex-col text-xl font-bold justify-center items-center text-grey-darker mb-5">
         Register
       </h1>
       <div class="mb-4">
@@ -16,7 +16,7 @@
         <input
           id="username"
           v-model="username"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           placeholder="Username"
         >
@@ -31,7 +31,7 @@
         <input
           id="password"
           v-model="password"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           placeholder="******************"
         >
@@ -39,7 +39,7 @@
       </div>
       <div class="flex items-center justify-between">
         <button
-          class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          class="text-white border border-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
           @click.prevent="registerUser"
         >
@@ -51,8 +51,11 @@
 </template>
 <script>
 import Register from '../assets/js/register';
+import ErrorMixin from '../mixins/error-mixin';
 
 export default {
+  name: 'Register',
+  mixins: [ErrorMixin],
   data () {
     return {
       username: '',
@@ -67,13 +70,13 @@ export default {
     async registerUser () {
       try {
         const status = await Register.registerUser(this.username, this.password);
-        if (parseInt(status, 10) !== 201) {
-          this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
-          return;
+        const parsedStatusCode = parseInt(status, 10);
+        if (parsedStatusCode === 201) {
+          return this.$router.push('/login');
         }
-        this.$router.push('/login');
+        this.displayError('error/showError', 'Invalid credentials. Please try something other.');
       } catch (error) {
-        this.$store.dispatch('error/showError', 'Somethign went wrong. Please try again.');
+        this.displayError('error/showError', 'Somethign went wrong. Please try again.');
       }
     },
   },

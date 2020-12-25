@@ -64,9 +64,8 @@ async function logUserIn ({ body }, res) {
  * @param {String} req.body.username
  */
 async function validateJWT ({ headers, body }, res) {
-  const { authorization } = headers;
+  const sendedToken = headers.authorization.split('Bearer ')[1];
   const { username } = body;
-  const sendedToken = authorization.split('Bearer ')[1];
   const areParamsValid = sendedToken && username;
   // init response params
   let isVerified = false;

@@ -12,7 +12,7 @@
     <div class="nav__login-out flex justify-center items-center">
       <nuxt-link
         v-if="isLoggedIn"
-        class="btn text-white py-2 px-4 border border-white rounded mr-4"
+        class="btn text-white py-1 px-2 border border-white rounded mr-4"
         tag="a"
         to="/remote"
       >
@@ -20,7 +20,7 @@
       </nuxt-link>
       <nuxt-link
         v-if="!isLoggedIn"
-        class="btn text-white py-2 px-4 border border-white rounded"
+        class="btn text-white py-1 px-2 border border-white rounded"
         tag="a"
         to="/login"
       >
@@ -28,7 +28,7 @@
       </nuxt-link>
       <a
         v-else
-        class="btn text-white py-2 px-4 border border-white rounded"
+        class="btn text-white py-1 px-2 border border-white rounded"
         @click="logOut"
       >
         Logout
@@ -40,6 +40,7 @@
 import JWTStorage from '../assets/js/JWTStorage';
 
 export default {
+  name: 'Navigation',
   computed: {
     isLoggedIn () {
       return this.$store.state.userProfile.isLoggedIn;

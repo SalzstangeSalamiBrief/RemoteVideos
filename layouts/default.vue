@@ -13,6 +13,7 @@ import Navigation from '../components/Navigation.vue';
 import Error from '../components/Error.vue';
 
 export default {
+  name: 'DefaultLayout',
   components: {
     Navigation,
     Error,
