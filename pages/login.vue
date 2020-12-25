@@ -77,20 +77,33 @@ export default {
     async logUserIn () {
       try {
         const { error } = await Login.login(this.username, this.password);
-        console.log('NICA SHCEI?=');
-        console.log(error);
-        console.log('--------------');
-        // TODO: redirect
         if (error) {
-          this.$store.dispatch('error/showError', 'Invalid credentials. Please try something other.');
-          JWTStorage.clearStorage();
-          return;
+          this.displayError('Invalid credentials. Please try something other.');
+        } else {
+          this.commitUserLogin();
         }
-        this.$store.commit('userProfile/login');
-        this.$store.commit('userProfile/setUsername', this.username);
-        this.$router.push('/remote');
       } catch (err) {
-        this.$store.dispatch('error/showError', 'Something went wrong. Please try again.');
+        this.displayError('Something went wrong. Please try again.');
+      }
+    },
+    /**
+     * log the user in through setting corresponsing variables in the store
+     * after that redirect to /remote
+     *
+     */
+    commitUserLogin () {
+      this.$store.commit('userProfile/login');
+      this.$store.commit('userProfile/setUsername', this.username);
+      this.$router.push('/remote');
+    },
+    /**
+     * display a passed msg as error for a failed login
+     * in addition to that clear the jwtStorage
+     */
+    displayError (msg) {
+      if (msg) {
+        this.$store.dispatch('error/showError', msg);
+        JWTStorage.clearStorage();
       }
     },
   },

@@ -2,8 +2,9 @@ const { validateKey, validateUsername } = require('../helpers/validator');
 const { verifyJWTToken } = require('../helpers/jwt');
 
 /**
- * Fuction for validation if the passed username, token and key is valid.
- * If not, send an error, else return with next()
+ * Middle ware for validation of the /keys/sendKey route.
+ * Check if the passed key, token and username is valid
+ * If that is not the case, than return with a 401 status and send an error-object
  */
 module.exports.auth = ({ body }, res, next) => {
   const { key, token: { username, token } } = body;

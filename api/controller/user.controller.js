@@ -1,6 +1,6 @@
-const { hashNewUser, checkPasswordHash } = require('../helpers/hashing');
+const { hashPassword, checkPasswordHash } = require('../helpers/hashing');
 const { validatePassword, validateUsername } = require('../helpers/validator');
-const { findUserByName } = require('../db/queries/partial/user');
+const { findUserByName, createNewUser } = require('../db/queries/partial/user');
 const { generateJWTToken, verifyJWTToken } = require('../helpers/jwt');
 
 /**
@@ -12,16 +12,22 @@ const { generateJWTToken, verifyJWTToken } = require('../helpers/jwt');
  * @param {String} req.body.password
  */
 async function createUserInDB ({ body: { username, password } }, res) {
-  console.log(username, password);
+  let status = 406;
   const doesUserAlreadyExist = await findUserByName(username);
   const isUsernameValid = validateUsername(username);
   const isPasswordValid = validatePassword(password);
-  if (!doesUserAlreadyExist && isUsernameValid && isPasswordValid) {
-    await hashNewUser(username, password);
-    console.log('register successfully');
-    return res.status(201).end();
+  const areParamsValid = isUsernameValid && isPasswordValid;
+  if (!doesUserAlreadyExist && areParamsValid) {
+    try {
+      const hash = await hashPassword(password);
+      await createNewUser(username, hash);
+      console.log('register successfully');
+      status = 201;
+    } catch (err) {
+      console.log(err);
+    }
   }
-  return res.status(406).end();
+  return res.status(status).end();
 }
 
 /**
@@ -34,7 +40,8 @@ async function createUserInDB ({ body: { username, password } }, res) {
  * @param {String} req.body.username
  * @param {String} req.body.password
  */
-async function logUserIn ({ body: { username, password } }, res) {
+async function logUserIn ({ body }, res) {
+  const { username, password } = body;
   const isUsernameValid = validateUsername(username);
   const isPasswordValid = validatePassword(password);
   if (isUsernameValid && isPasswordValid) {
@@ -56,24 +63,26 @@ async function logUserIn ({ body: { username, password } }, res) {
  * @param {String} req.headers.authorization
  * @param {String} req.body.username
  */
-async function validateJWT ({ headers: { authorization }, body: { username } }, res) {
+async function validateJWT ({ headers, body }, res) {
+  const { authorization } = headers;
+  const { username } = body;
   const sendedToken = authorization.split('Bearer ')[1];
   const areParamsValid = sendedToken && username;
+  // init response params
+  let isVerified = false;
   if (areParamsValid) {
     const existingUser = await findUserByName(username);
     const isExistingUserThePassedUser = existingUser.username === username;
     if (isExistingUserThePassedUser) {
       try {
-        const isVerified = await verifyJWTToken(username, sendedToken);
-        if (isVerified) {
-          return res.status(202).send({ isVerified });
-        }
+        isVerified = verifyJWTToken(username, sendedToken);
       } catch (err) {
         console.log(err);
       }
     }
   }
-  return res.status(401).end({ isVerified: false });
+  const status = isVerified ? 202 : 401;
+  return res.status(status).send({ isVerified });
 }
 
 module.exports = {

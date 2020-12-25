@@ -19,7 +19,6 @@ require('dotenv').config();
 
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT_BACKEND || 9000;
-console.log(process.env.HOST);
 
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, './private/logs/', 'requestLogs.log'),
@@ -27,7 +26,7 @@ const accessLogStream = fs.createWriteStream(
 );
 
 app.set('port', port);
-
+// connect to db
 mongoose
   .connect(
     'mongodb://localhost/RemoteVideos',
@@ -35,13 +34,13 @@ mongoose
   )
   .then(() => console.log('connected to MongoDB'))
   .catch((e) => console.log(e));
-
+// add middleware
 app.use(logger('combined', { stream: accessLogStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Listen the server
 app.listen(port, host);
-
+// add routed
 app.use('/users', cors(CorsOptions), UserRouter);
 app.use('/keys', cors(CorsOptions), auth, KeyHandlerRouter);
 

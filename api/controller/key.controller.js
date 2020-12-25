@@ -13,12 +13,12 @@ function sendKeyToOS ({ body: { key } }, res) {
     if (key === 'shift-n') {
       // next in playlist
       keySender.sendCombination(['shift', 'n']);
-      return;
+    } else {
+      keySender.sendKey(key);
     }
-    keySender.sendKey(key);
-    res.status(202).end();
   }
-  res.status(403).end();
+  const status = isKeyValid ? 202 : 403;
+  res.status(status).end();
 }
 
 module.exports = {

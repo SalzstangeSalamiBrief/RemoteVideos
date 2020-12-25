@@ -7,6 +7,14 @@ import JWTStorage from './JWTStorage';
 class Login {
   constructor () {
     this.loginURL = `http://${process.env.HOST}:${process.env.PORT_BACKEND}/users`;
+    this.fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: {},
+    };
   }
 
   /**
@@ -39,19 +47,14 @@ class Login {
   async postKey (username, password, token) {
     const areCredentialsValid = username && token && password;
     if (areCredentialsValid) {
+      const options = { ...this.fetchOptions };
+      options.headers.Authorization = `Bearer ${token}`;
+      options.body = JSON.stringify({
+        username,
+        password,
+      });
       try {
-        const response = await fetch(`${this.loginURL}/checkToken`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        });
+        const response = await fetch(`${this.loginURL}/checkToken`, options);
         return response.status === 202;
       } catch (err) {
         return false;

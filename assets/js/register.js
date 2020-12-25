@@ -18,7 +18,6 @@ class UserRegistration {
   async registerUser (username = '', password = '') {
     const isUsernameValid = Validator.validateUsername(username);
     const isPasswordValid = Validator.validatePassword(password);
-    console.log(isUsernameValid, isPasswordValid);
     if (isUsernameValid && isPasswordValid) {
       try {
         const response = await fetch(`${this.url}/users/register`, {
@@ -29,7 +28,6 @@ class UserRegistration {
           },
           body: JSON.stringify({ username, password }),
         });
-        console.log(response.status);
         return response.status;
       } catch (err) {
         return { err: 'Could not register this user 2' };

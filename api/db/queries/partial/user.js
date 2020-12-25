@@ -8,25 +8,25 @@ require('../../models/User');
 const User = mongoose.model('users');
 
 /**
- * Function which creates a new user
+ * create a new user in the database
  * @param {String} username
  * @param {String} password
  */
-function createNewUser (username, password) {
+async function createNewUser (username, password) {
   const newUser = new User({
     username,
     password,
   });
-  return newUser.save();
+  const createdUser = await newUser.save();
+  return createdUser.toObject();
 }
 /**
- * Function which finds a user by his name
+ * find a single user by the passed username
  * @param {String} username
  */
-function findUserByName (username) {
-  return User.findOne({ username })
-    .select('-_id -__v')
-    .exec();
+async function findUserByName (username) {
+  const foundUser = await User.findOne({ username }).select('-_id -__v').lean();
+  return foundUser;
 }
 
 module.exports = {

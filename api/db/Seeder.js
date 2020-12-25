@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const UserModel = require('./models/User');
 
 /**
- * Function for connectiong to mongodb via mongoose
+ * Function for connecting to mongodb via mongoose
  */
 function connectToDB () {
   // connect mongoose
