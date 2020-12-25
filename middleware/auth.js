@@ -22,7 +22,6 @@ export default async function Temp ({
       ({ username, token } = JSON.parse(cookie.split('=', 2)[1]));
     }
   } else {
-    console.log('token ls');
     ({ username, token } = JWTStorage.getAuthToken());
   }
   const areCredentialsAlive = username && token;
@@ -38,7 +37,6 @@ export default async function Temp ({
   const isRemoteRouteTarget = fullPath === '/remote';
   const unauthorizedAccessOnControls = !isLoggedIn && isRemoteRouteTarget;
   if (unauthorizedAccessOnControls) {
-    console.log('before redircet');
     return redirect('/login');
   }
 }

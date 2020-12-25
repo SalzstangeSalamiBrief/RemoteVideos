@@ -1,7 +1,7 @@
 /**
  * Class for registering a user
  */
-import Validator from './validator';
+import { validateUsername, validatePassword } from '../../util/validator';
 
 class UserRegistration {
   constructor () {
@@ -16,8 +16,8 @@ class UserRegistration {
    * @param {String} password
    */
   async registerUser (username = '', password = '') {
-    const isUsernameValid = Validator.validateUsername(username);
-    const isPasswordValid = Validator.validatePassword(password);
+    const isUsernameValid = validateUsername(username);
+    const isPasswordValid = validatePassword(password);
     if (isUsernameValid && isPasswordValid) {
       try {
         const response = await fetch(`${this.url}/users/register`, {

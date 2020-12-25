@@ -1,4 +1,4 @@
-const { validateKey, validateUsername } = require('../helpers/validator');
+const { validateKey, validateUsername } = require('../../util/validator');
 const { verifyJWTToken } = require('../helpers/jwt');
 
 /**
@@ -11,7 +11,6 @@ module.exports.auth = ({ body, headers }, res, next) => {
   const isKeyValid = validateKey(body.key);
   const isUsernameValid = validateUsername(body.username);
   const isJWTTokenValid = verifyJWTToken(body.username, sendedToken);
-  console.log(isKeyValid, isUsernameValid, isJWTTokenValid);
   const areArgumentsValid = isKeyValid && isUsernameValid && isJWTTokenValid;
   if (areArgumentsValid) {
     return next();

@@ -1,5 +1,5 @@
 const keySender = require('node-key-sender');
-const Validator = require('../helpers/validator');
+const { validateKey } = require('../../util/validator');
 
 /**
  * Validates if a passed key in the body is allowed.
@@ -8,7 +8,7 @@ const Validator = require('../helpers/validator');
  * @param {Request} res
  */
 function sendKeyToOS ({ body: { key } }, res) {
-  const isKeyValid = Validator.validateKey(key);
+  const isKeyValid = validateKey(key);
   if (isKeyValid) {
     if (key === 'shift-n') {
       // next in playlist

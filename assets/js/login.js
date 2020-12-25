@@ -1,7 +1,7 @@
 /**
  * Class for the login and logout feature
  */
-import Validator from './validator';
+import { validatePassword, validateUsername } from '../../util/validator';
 import JWTStorage from './JWTStorage';
 
 class Login {
@@ -21,9 +21,9 @@ class Login {
    * check if the jwt is valid
    * @param {String} username
    */
-  // async checkKey (username, token) {
   async checkKey (username, token) {
-    if (username && token) {
+    const isUsernameValid = validateUsername(username);
+    if (isUsernameValid && token) {
       try {
         const options = { ...this.fetchOptions };
         options.headers.Authorization = `Bearer ${token}`;
@@ -40,7 +40,7 @@ class Login {
   }
 
   async postKey (username, password, token) {
-    const areCredentialsValid = username && token && password;
+    const areCredentialsValid = validateUsername(username) && token && validatePassword(password);
     if (areCredentialsValid) {
       const options = { ...this.fetchOptions };
       options.headers.Authorization = `Bearer ${token}`;
@@ -49,7 +49,6 @@ class Login {
         password,
       });
       try {
-        console.log(options);
         const response = await fetch(`${this.loginURL}/checkToken`, options);
         return response.status === 202;
       } catch (err) {
@@ -65,7 +64,7 @@ class Login {
    * @param {String} password
    */
   async login (username = '', password = '') {
-    const areParamsValid = Validator.validateUsername(username) && Validator.validatePassword(password);
+    const areParamsValid = validateUsername(username) && validatePassword(password);
     if (areParamsValid) {
       const options = { ...this.fetchOptions };
       options.body = JSON.stringify({ username, password });

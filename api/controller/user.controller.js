@@ -1,5 +1,5 @@
 const { hashPassword, checkPasswordHash } = require('../helpers/hashing');
-const { validatePassword, validateUsername } = require('../helpers/validator');
+const { validatePassword, validateUsername } = require('../../util/validator');
 const { findUserByName, createNewUser } = require('../db/queries/partial/user');
 const { generateJWTToken, verifyJWTToken } = require('../helpers/jwt');
 

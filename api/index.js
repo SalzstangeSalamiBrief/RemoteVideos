@@ -38,11 +38,12 @@ mongoose
 app.use(logger('combined', { stream: accessLogStream }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors(CorsOptions));
 // Listen the server
 app.listen(port, host);
 // add routed
-app.use('/users', cors(CorsOptions), UserRouter);
-app.use('/keys', cors(CorsOptions), auth, KeyHandlerRouter);
+app.use('/users', UserRouter);
+app.use('/keys', auth, KeyHandlerRouter);
 
 // Export express app
 module.exports = app;

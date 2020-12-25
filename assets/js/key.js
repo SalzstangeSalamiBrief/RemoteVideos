@@ -1,4 +1,4 @@
-import Validator from './validator';
+import { validateKey } from '../../util/validator';
 import JWTStorage from './JWTStorage';
 
 class KeyHandler {
@@ -8,7 +8,8 @@ class KeyHandler {
   }
 
   async sendKey (key, username) {
-    if (Validator.validateKey(key)) {
+    const isKeyValid = validateKey(key);
+    if (isKeyValid) {
       const { token } = JWTStorage.getAuthToken();
       try {
         fetch(`${this.url}/sendKey`, {
