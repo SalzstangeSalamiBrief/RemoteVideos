@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use(cors(CorsOptions));
 // Listen the server
 app.listen(port, host);
-// add routed
+// add routes
 app.use('/users', UserRouter);
 app.use('/keys', auth, KeyHandlerRouter);
 

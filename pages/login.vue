@@ -31,13 +31,10 @@
         <input
           id="password"
           v-model="password"
-          class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="bg-white shadow appearance-none border border-red rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           placeholder="******************"
         >
-        <p class="text-red-100 text-xs italic">
-          Please enter a password.
-        </p>
       </div>
       <div class="flex items-center justify-between">
         <button

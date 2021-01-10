@@ -6,7 +6,8 @@ This app is a remote control for HTML5 player. You can start/stop a video, enter
 
 ## Usage
 
-Let the server run in your WLAN on the same machine you want to watch Videos. Connect yourself with a mobile device like a smartphone to the server and use this device as remote control.
+Let the server run in your local network on the same machine you want to watch Videos. 
+Connect yourself with a mobile device like a smartphone to the server and use this device as remote control.
 
 ## Requirements
 
