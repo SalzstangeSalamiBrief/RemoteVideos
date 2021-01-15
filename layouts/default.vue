@@ -3,7 +3,7 @@
     <navigation />
     <error />
 
-    <main class="full-screen">
+    <main class="full-screen px-2">
       <nuxt class="relative pin" />
     </main>
   </div>

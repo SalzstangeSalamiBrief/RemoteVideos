@@ -2,13 +2,13 @@
   <div>
     <div class="flex justify-center items-center svg-btn-container">
       <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded flex justify-center"
         @click="sendKeyEvent('f')"
       >
         <icon-fullscreen class="svg-white" />
       </button>
       <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded flex justify-center"
         @click="sendKeyEvent('shift-n')"
       >
         <fa
@@ -19,7 +19,7 @@
     </div>
     <div class="flex justify-center items-center svg-btn-container">
       <button
-        class="btn btn--pause-play flex flex-col  justify-center items-center"
+        class="btn btn--pause-play flex flex-col justify-center items-center"
         @click="sendKeyEvent('k')"
       >
         <fa
@@ -36,7 +36,7 @@
     </div>
     <div class="flex justify-center items-center svg-btn-container">
       <button
-        class="btn svg-btn control text-white py-2 px-4 border border-white rounded"
+        class="btn svg-btn control text-white py-2 px-4 border border-white rounded flex justify-center"
         @click="sendKeyEvent('0')"
       >
         <fa
@@ -46,7 +46,7 @@
       </button>
       <button
         v-if="!isMuted"
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn flex justify-center"
         @click="sendKeyEvent('m')"
       >
         <fa
@@ -56,7 +56,7 @@
       </button>
       <button
         v-else
-        class="btn control text-white py-2 px-4 border border-white rounded svg-btn"
+        class="btn control text-white py-2 px-4 border border-white rounded svg-btn flex justify-center"
         @click="sendKeyEvent('m')"
       >
         <fa
